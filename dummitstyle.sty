@@ -13,7 +13,7 @@
 \definecolor{exerciseref}{HTML}{0DA327}
 \pagecolor{pagecolor!50}
 
-\renewcommand{\exref}[1]{\hypersetup{linkcolor=exerciseref}\autoref{ex:#1}}
+\renewcommand{\exref}[1]{\hypersetup{linkcolor=exerciseref}\textup{\autoref{ex:#1}}}
 \newcommand{\defref}[1]{\hypersetup{linkcolor=red}\hyperref[def:#1]{#1}}
 
 \newcommand{\hint}[1]{\textcolor{WildStrawberry}{\textsc{D\&F Hint.}}~\emph{#1}}
@@ -107,5 +107,14 @@
 }{%
   \oldendpmatrix
 }
+
+% Cycles Command
+
+\ExplSyntaxOn
+\NewDocumentCommand{\cyc}{m}{
+    \seq_set_split:Nnn \l_tmpa_seq { ~ } {#1}
+    ( \seq_use:Nn \l_tmpa_seq {\ } )
+}
+\ExplSyntaxOff
 
 \endinput
