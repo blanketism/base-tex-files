@@ -12,9 +12,21 @@
 \RequirePackage{microtype}
 \RequirePackage{hyperref}
 
+% Page Setup Settings
+
+\hypersetup{
+    colorlinks=true,
+    linkcolor=Plum,
+    urlcolor=red}
+\pagestyle{fancy}
+\fancyhead{}
+\fancyhead[R]{\rightmark}
+\fancyfoot[R]{\hypersetup{linkcolor=gray}\hyperlink{clickabletoc}{Table of Contents}}
+
 % General Macros
 
-\newcommand{\exref}[1]{\autoref{ex:#1}}
+\newcommand{\exref}[1]{\textup{\autoref{ex:#1}}}
+\newcommand{\nzero}{\setminus\{0\}}
 \renewcommand{\b}{\textbf}
 \renewcommand{\qedsymbol}{$\blacksquare$}
 \newcommand{\rightimp}{($\Rightarrow$) }
