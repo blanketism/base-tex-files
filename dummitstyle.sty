@@ -32,7 +32,7 @@
 \newtcbtheorem[use counter*=exercount]{exer}% environment name
     {Exercise}% Title text
     {enhanced,% tcolorbox styles
-    attach boxed title to top left = {yshift=-3mm, xshift=5mm},%
+    attach boxed title to top left={yshift=-3mm, xshift=5mm},%
     fonttitle=\bfseries,%
     top = 10pt, bottom = 8pt,%
     boxrule=1pt,%
@@ -50,15 +50,22 @@
 }
 {ex}
 
-\newenvironment{exercise}[1][]{\begin{exer}{}{#1}}{\end{exer}}
+\NewDocumentEnvironment{exercise}{m}
+{\begin{exer}{}{#1}}{\end{exer}}
 
-\newenvironment{spex}[1][]{\begin{exer}%
-    [title = Exercise~\theexercount,%
-    drop fuzzy shadow = blue!20,%
-    colback=RoyalBlue!8, colframe=CadetBlue!60,%
-    colbacktitle=BlueViolet!15, coltitle=MidnightBlue,%
-    boxed title style ={colframe=NavyBlue!70}]{}{#1}}
-{\end{exer}}
+\NewDocumentEnvironment{spex}{m o}
+{
+    \IfValueTF{#2}
+    {\def\spextitle{Exercise~\theexercount:~#2}}
+    {\def\spextitle{Exercise~\theexercount}}
+    \begin{exer}[
+        title = \spextitle,
+        drop fuzzy shadow = blue!20,
+        colback=RoyalBlue!8, colframe=CadetBlue!60,
+        colbacktitle=BlueViolet!15, coltitle=MidnightBlue,
+        boxed title style ={colframe=NavyBlue!70}
+    ]{}{#1}
+}{\end{exer}}
 
 \newtcolorbox{lemmabox}{%
     enhanced, sharp corners,%
@@ -89,12 +96,12 @@
 \newenvironment{solenum}{%
     \begin{sol}%
         \begin{subexercises}%
-}{\qh\end{subexercises}\end{sol}}
+}{\qedhere\end{subexercises}\end{sol}}
 
 \newenvironment{solitem}{%
     \begin{sol}%
         \begin{itemize}%
-}{\qh\end{itemize}\end{sol}}
+}{\qedhere\end{itemize}\end{sol}}
 
 % Save the original pmatrix commands
 \let\oldpmatrix\pmatrix
@@ -102,8 +109,8 @@
 
 % Renew the environment to inject the tight array stretch
 \renewenvironment{pmatrix}[1][]{%
-  \renewcommand{\arraystretch}{1}% <-- Adjust this value as needed
-  \oldpmatrix
+    \renewcommand{\arraystretch}{1}% <-- Adjust this value as needed
+    \oldpmatrix
 }{%
   \oldendpmatrix
 }
