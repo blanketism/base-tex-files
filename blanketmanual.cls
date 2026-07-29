@@ -1,11 +1,18 @@
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesClass{blanketmanual}[2024/06/10 Blanket Manual Class]
 
-% Page Width Settings
+% Page Settings
 
-\LoadClass[11pt]{extarticle}
+\LoadClass[11pt, twoside]{extarticle}
+\raggedbottom
 \RequirePackage[margin = 1in]{geometry}
-\RequirePackage{mathtools}
+
+\RequirePackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[RE]{\rightmark}
+\fancyhead[RO]{\leftmark}
+\fancyfoot[C]{\thepage}
 
 % Spacing Settings
 

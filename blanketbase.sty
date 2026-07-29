@@ -6,21 +6,17 @@
 \RequirePackage{amsthm}
 \RequirePackage[skins, breakable, theorems, raster, listings]{tcolorbox}
 \RequirePackage{tikz}
-\RequirePackage{fancyhdr}
 \RequirePackage[dvipsnames]{xcolor}
 \RequirePackage{enumitem}
 \RequirePackage{microtype}
 \RequirePackage{hyperref}
 
-% Page Setup Settings
+% Hyperref Settings
 
 \hypersetup{
     colorlinks=true,
-    linkcolor=Plum,
+    linkcolor=blue,
     urlcolor=red}
-\pagestyle{fancy}
-\fancyhead{}
-\fancyhead[R]{\rightmark}
 \fancyfoot[R]{\hypersetup{linkcolor=gray}\hyperlink{clickabletoc}{Table of Contents}}
 
 % General Macros
@@ -29,8 +25,36 @@
 \newcommand{\nzero}{\setminus\{0\}}
 \renewcommand{\b}{\textbf}
 \renewcommand{\qedsymbol}{$\blacksquare$}
-\newcommand{\rightimp}{($\Rightarrow$) }
-\newcommand{\leftimp}{($\Leftarrow$) }
+\newcommand{\rightimp}{($\Rightarrow$)~}
+\newcommand{\leftimp}{($\Leftarrow$)~}
+
+% Enumitem Settings
+
+\setlist[itemize]{listparindent=\parindent, parsep = 0pt}
+
+\setlist[enumerate]{listparindent=\parindent, parsep = 0pt}
+\setlist[enumerate, 1]{label=\arabic*)}
+
+\newlist{subexercises}{enumerate}{3}
+\setlist[subexercises]{label=(\alph*), listparindent=\parindent, parsep = 0pt, topsep = 2pt}
+
+% Useful Math Macros
+
+\DeclareMathOperator{\argmin}{\arg\,\min}
+\DeclareMathOperator{\argmax}{\arg\,\max}
+\DeclareMathOperator{\im}{im}
+\DeclarePairedDelimiter{\abs}{\lvert}{\rvert}
+\DeclarePairedDelimiter{\gen}{\langle}{\rangle}
+\DeclarePairedDelimiter{\floor}{\lfloor}{\rfloor}
+\DeclarePairedDelimiter{\set}{\{}{\}}
+\newcommand{\inv}{^{-1}}
+\newcommand{\zp}{\zbb^+}
+\newcommand{\dd}{\,\mathrm{d}}
+\renewcommand{\emptyset}{\varnothing}
+\renewcommand{\bar}[1]{\widebar{#1}\hspace{0.75pt}{}}
+\newcommand{\ep}{\varepsilon}
+\newcommand{\wt}[1]{\widetilde{#1}}
+\newcommand{\wh}[1]{\smash{\widehat{#1}}}
 
 % \mathbb Commands
 
@@ -90,25 +114,6 @@
 \newcommand{\ycal}{\mathcal Y}
 \newcommand{\zcal}{\mathcal Z}
 
-% Useful Math Macros
-
-\DeclareMathOperator{\argmin}{\arg\,\min}
-\DeclareMathOperator{\argmax}{\arg\,\max}
-\DeclarePairedDelimiter{\abs}{\lvert}{\rvert}
-\DeclarePairedDelimiter{\gen}{\langle}{\rangle}
-\DeclarePairedDelimiter{\floor}{\lfloor}{\rfloor}
-\DeclarePairedDelimiter{\set}{\{}{\}}
-\newcommand{\nz}{-\{0\}}
-\newcommand{\inv}{^{-1}}
-\newcommand{\zp}{\zbb^+}
-\newcommand{\dd}{\,\mathrm{d}}
-\renewcommand{\emptyset}{\varnothing}
-\renewcommand{\bar}[1]{\widebar{#1}\hspace{0.75pt}{}}
-\newcommand{\ep}{\varepsilon}
-\newcommand{\qh}{\qedhere}
-\newcommand{\wt}[1]{\widetilde{#1}}
-\newcommand{\wh}[1]{\smash{\widehat{#1}}}
-
 % Linear Algebra Commands
 
 \newcommand{\op}{\oplus}
@@ -159,7 +164,6 @@
 \DeclareMathOperator{\id}{id}
 \DeclareMathOperator{\stab}{Stab}
 \DeclareMathOperator{\orb}{Orb}
-\DeclareMathOperator{\im}{im}
 \DeclareMathOperator{\syl}{Syl}
 \DeclareMathOperator{\hol}{Hol}
 \newcommand{\unt}{^\times}
@@ -172,15 +176,5 @@
 
 \DeclareMathOperator{\diam}{diam}
 \DeclareMathOperator{\dist}{dist}
-
-% Enumitem Settings
-
-\setlist[itemize]{listparindent=\parindent, parsep = 0pt}
-
-\setlist[enumerate]{listparindent=\parindent, parsep = 0pt}
-\setlist[enumerate, 1]{label=\arabic*)}
-
-\newlist{subexercises}{enumerate}{3}
-\setlist[subexercises]{label=(\alph*), listparindent=\parindent, parsep = 0pt, topsep = 2pt}
 
 \endinput
