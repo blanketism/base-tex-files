@@ -1,5 +1,5 @@
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesPackage{blanketbase}[2024/06/10 Blanket Base File]
+\ProvidesPackage{blanketbase}
 
 \RequirePackage{graphicx}
 \RequirePackage{mathtools}
@@ -12,42 +12,23 @@
 \RequirePackage{microtype}
 \RequirePackage{hyperref}
 
-% Hyperref Settings
+% Enumitem Settings
 
-\hypersetup{
-    colorlinks=true,
-    linkcolor=blue,
-    urlcolor=red}
-\fancyfoot[R]{\hypersetup{linkcolor=gray}\hyperlink{clickabletoc}{Table of Contents}}
+\setlist{listparindent=\parindent, parsep = 0pt, itemsep = 0pt, topsep = 0pt, labelsep = 0.4em}
+
+\setlist[enumerate, 1]{label=(\arabic*)}
+
+\newlist{subexercises}{enumerate}{2}
+\setlist[subexercises, 1]{label=(\alph*)}
+\setlist[subexercises, 2]{label=(\roman*)}
 
 % General Macros
 
-\newcommand{\exref}[1]{\textup{\autoref{ex:#1}}}
 \newcommand{\nzero}{\setminus\{0\}}
 \renewcommand{\b}{\textbf}
 \renewcommand{\qedsymbol}{$\blacksquare$}
-\newcommand{\rightimp}{($\Rightarrow$)~}
-\newcommand{\leftimp}{($\Leftarrow$)~}
-
-% Enumitem Settings
-
-\setlist[itemize]{listparindent=\parindent, parsep = 0pt}
-
-\setlist[enumerate]{listparindent=\parindent, parsep = 0pt}
-\setlist[enumerate, 1]{label=\arabic*)}
-
-\newlist{subexercises}{enumerate}{3}
-\setlist[subexercises]{label=(\alph*), listparindent=\parindent, parsep = 0pt, topsep = 2pt}
-
-% Useful Math Macros
-
-\DeclareMathOperator{\argmin}{\arg\,\min}
-\DeclareMathOperator{\argmax}{\arg\,\max}
-\DeclareMathOperator{\im}{im}
-\DeclarePairedDelimiter{\abs}{\lvert}{\rvert}
-\DeclarePairedDelimiter{\gen}{\langle}{\rangle}
-\DeclarePairedDelimiter{\floor}{\lfloor}{\rfloor}
-\DeclarePairedDelimiter{\set}{\{}{\}}
+\newcommand{\rightimp}{($\Rightarrow$)}
+\newcommand{\leftimp}{($\Leftarrow$)}
 \newcommand{\inv}{^{-1}}
 \newcommand{\zp}{\zbb^+}
 \newcommand{\dd}{\,\mathrm{d}}
@@ -56,126 +37,17 @@
 \newcommand{\ep}{\varepsilon}
 \newcommand{\wt}[1]{\widetilde{#1}}
 \newcommand{\wh}[1]{\smash{\widehat{#1}}}
+\DeclarePairedDelimiter{\abs}{\lvert}{\rvert}
+\DeclarePairedDelimiter{\gen}{\langle}{\rangle}
+\DeclarePairedDelimiter{\floor}{\lfloor}{\rfloor}
+\DeclarePairedDelimiter{\set}{\{}{\}}
+\DeclareMathOperator{\argmin}{\arg\,\min}
+\DeclareMathOperator{\argmax}{\arg\,\max}
+\DeclareMathOperator{\im}{im}
 
-% \mathbb Commands
-
-\newcommand{\abb}{\mathbb A}
-\newcommand{\bbb}{\mathbb B}
-\newcommand{\cbb}{\mathbb C}
-\newcommand{\dbb}{\mathbb D}
-\newcommand{\ebb}{\mathbb E}
-\newcommand{\fbb}{\mathbb F}
-\newcommand{\gbb}{\mathbb G}
-\newcommand{\hbb}{\mathbb H}
-\newcommand{\ibb}{\mathbb I}
-\newcommand{\jbb}{\mathbb J}
-\newcommand{\kbb}{\mathbb K}
-\newcommand{\lbb}{\mathbb L}
-\newcommand{\mbb}{\mathbb M}
-\newcommand{\nbb}{\mathbb N}
-\newcommand{\obb}{\mathbb O}
-\newcommand{\pbb}{\mathbb P}
-\newcommand{\qbb}{\mathbb Q}
-\newcommand{\rbb}{\mathbb R}
-\newcommand{\sbb}{\mathbb S}
-\newcommand{\tbb}{\mathbb T}
-\newcommand{\ubb}{\mathbb U}
-\newcommand{\vbb}{\mathbb V}
-\newcommand{\wbb}{\mathbb W}
-\newcommand{\xbb}{\mathbb X}
-\newcommand{\ybb}{\mathbb Y}
-\newcommand{\zbb}{\mathbb Z}
-
-% \mathcal Commands
-
-\newcommand{\acal}{\mathcal A}
-\newcommand{\bcal}{\mathcal B}
-\newcommand{\ccal}{\mathcal C}
-\newcommand{\dcal}{\mathcal D}
-\newcommand{\ecal}{\mathcal E}
-\newcommand{\fcal}{\mathcal F}
-\newcommand{\gcal}{\mathcal G}
-\newcommand{\hcal}{\mathcal H}
-\newcommand{\ical}{\mathcal I}
-\newcommand{\jcal}{\mathcal J}
-\newcommand{\kcal}{\mathcal K}
-\newcommand{\lcal}{\mathcal L}
-\newcommand{\mcal}{\mathcal M}
-\newcommand{\ncal}{\mathcal N}
-\newcommand{\ocal}{\mathcal O}
-\newcommand{\pcal}{\mathcal P}
-\newcommand{\qcal}{\mathcal Q}
-\newcommand{\rcal}{\mathcal R}
-\newcommand{\scal}{\mathcal S}
-\newcommand{\tcal}{\mathcal T}
-\newcommand{\ucal}{\mathcal U}
-\newcommand{\vcal}{\mathcal V}
-\newcommand{\wcal}{\mathcal W}
-\newcommand{\xcal}{\mathcal X}
-\newcommand{\ycal}{\mathcal Y}
-\newcommand{\zcal}{\mathcal Z}
-
-% Linear Algebra Commands
-
-\newcommand{\op}{\oplus}
-\DeclareMathOperator{\nul}{null}
-\DeclareMathOperator{\range}{range}
-\DeclareMathOperator{\spn}{span}
-\DeclareMathOperator{\rank}{rank}
-\DeclareMathOperator{\colrank}{column\,rank}
-\DeclareMathOperator{\rowrank}{row\,rank}
-\DeclareMathOperator{\trace}{trace}
-\newcommand{\lin}[1]{\mathcal L(#1)}
-
-% Statistics Commands
-
-\DeclareMathOperator{\pois}{Poisson}
-\DeclareMathOperator{\bern}{Bernoulli}
-\DeclareMathOperator{\se}{SE}
-\DeclareMathOperator{\expo}{Exp}
-\DeclareMathOperator{\bino}{Binom}
-\DeclareMathOperator{\bias}{Bias}
-\DeclareMathOperator{\cov}{Cov}
-\DeclareMathOperator{\rse}{RSE}
-\DeclareMathOperator{\aic}{AIC}
-\DeclareMathOperator{\bic}{BIC}
-\DeclareMathOperator{\corr}{Corr}
-\DeclareMathOperator{\var}{Var}
-\DeclareMathOperator{\geom}{Geom}
-\DeclareMathOperator{\cauchy}{Cauchy}
-\DeclareMathOperator{\rss}{RSS}
-\DeclareMathOperator{\vif}{VIF}
-\DeclareMathOperator{\tss}{TSS}
-\DeclareMathOperator{\err}{Err}
-\DeclareMathOperator{\mse}{MSE}
-\DeclareMathOperator{\bin}{Binom}
-\DeclareMathOperator{\cv}{CV}
-
-% Abstract Algebra Commands
-
-\DeclareMathOperator{\cha}{char}
-\DeclareMathOperator{\ut}{UT}
-\DeclareMathOperator{\gl}{GL}
-\DeclareMathOperator{\splin}{SL}
-\DeclareMathOperator{\lcm}{lcm}
-\DeclareMathOperator{\aut}{Aut}
-\DeclareMathOperator{\tor}{Tor}
-\DeclareMathOperator{\inn}{Inn}
-\DeclareMathOperator{\out}{Out}
-\DeclareMathOperator{\id}{id}
-\DeclareMathOperator{\stab}{Stab}
-\DeclareMathOperator{\orb}{Orb}
-\DeclareMathOperator{\syl}{Syl}
-\DeclareMathOperator{\hol}{Hol}
-\newcommand{\unt}{^\times}
-\newcommand{\nsub}{\trianglelefteq}
-\newcommand{\semidir}{\rtimes}
-\newcommand{\units}[1][n]{(\zbb/{#1}\zbb)^\times}
-\newcommand{\intmod}[1][n]{\zbb/{#1}\zbb}
-
-% Topology/Analysis Commands
-
-\DeclareMathOperator{\diam}{diam}
-\DeclareMathOperator{\dist}{dist}
+\RequirePackage{myfontcommands}
+\RequirePackage{myalgebracommands}
+\RequirePackage{mystatisticscommands}
+\RequirePackage{myanalysiscommands}
 
 \endinput
