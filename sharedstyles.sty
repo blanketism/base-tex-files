@@ -1,0 +1,75 @@
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{sharedstyles}
+
+% Page and Hyperref Settings
+
+\pagecolor{pagecolor}
+
+\hypersetup{
+    colorlinks=true,
+    linkcolor=basecolor,
+    urlcolor=red}
+\fancyfoot[R]{\hypersetup{linkcolor=basecolor}\hyperlink{clickabletoc}{Table of Contents}}
+
+\tcbset{axlerexercise/.style={
+    enhanced,
+    toptitle=2pt, bottomtitle=2pt,
+    arc=0pt, drop fuzzy shadow southeast,
+    boxrule=0pt,
+    borderline west={2.5pt}{0pt}{basecolor},
+    colframe = gray!20, colback = White,
+    coltitle=black, fonttitle=\bfseries,
+    after skip=1.2\baselineskip, before skip=1.2\baselineskip
+}}
+
+\tcbset{dummitexercise/.style={
+    enhanced,
+    fonttitle=\bfseries,
+    top = 10pt, bottom = 8pt,
+    boxrule=1pt,
+    arc=3mm,
+    colback=Green!7!White, colframe=ForestGreen!30,
+    colbacktitle=OliveGreen!14, coltitle=basecolor,
+    drop fuzzy shadow = ForestGreen!70,
+    attach boxed title to top left={yshift=-3mm, xshift=5mm},
+    boxed title style={
+        size=small,
+        boxrule=1.2pt,
+        left=0.3ex, right=0.3ex, top=0.1ex, bottom=0.2ex,
+        colframe=ForestGreen!50,
+        arc = 1.5mm
+    }
+}}
+
+% Exercise Environment
+
+\NewDocumentEnvironment{exercise}{m}
+{\begin{exer}{}{#1}}{\end{exer}}
+
+\newcommand{\exref}[1]{\hypersetup{linkcolor=exerciseref}\textup{\autoref{ex:#1}}}
+
+% Solution Environments
+
+\NewDocumentEnvironment{sol}{O{basecolor}}{%
+    \begin{proof}[\emph{\textbf{\textcolor{#1}{Solution.}}}\@addpunct{}]%
+}{\end{proof}}
+
+\NewDocumentEnvironment{solenum}{O{basecolor}}{%
+    \begin{sol}[#1]
+        \leavevmode%
+        \begin{subexercises}%
+}{\qedhere\end{subexercises}\end{sol}}
+
+\NewDocumentEnvironment{solitem}{O{basecolor}}{%
+    \begin{sol}[#1]
+        \leavevmode%
+        \begin{itemize}%
+}{\qedhere\end{itemize}\end{sol}}
+
+% Shared Commands
+
+\newcommand{\hint}[1]{{\color{hintcolor}\textbf{\bookauthor~Hint.}~\emph{#1}}}
+\newcommand{\note}[1]{{\color{notecolor}\textbf{\bookauthor~Note.}~\emph{#1}}}
+\newcommand{\remark}[1]{{\color{remarkcolor}\textbf{Manual~Remark.}~\emph{#1}}}
+
+\endinput
