@@ -1,57 +1,42 @@
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesPackage{dummitstyle}[2024/07/23 Dummit Style File]
+\ProvidesPackage{dummitstyle}
+
+% Manual Settings
 
 \RequirePackage{stickstootext}
 \RequirePackage[stickstoo, vvarbb]{newtxmath}
 \usetikzlibrary{arrows.meta, positioning, shadows, shapes.geometric}
-
+\newcommand{\bookauthor}{D\&F}
 \renewcommand{\arraystretch}{1.1}
 
-\newcommand{\equp}{\vspace{-\baselineskip}}
-\definecolor{pagecolor}{HTML}{faecca}
-\definecolor{exercisetitle}{HTML}{2D963B}
-\definecolor{exerciseref}{HTML}{0DA327}
-\pagecolor{pagecolor!50}
+% Color Settings
 
-\renewcommand{\exref}[1]{\hypersetup{linkcolor=exerciseref}\textup{\autoref{ex:#1}}}
+\definecolor{dummitbase}{HTML}{faecca}
+\definecolor{mygreen}{HTML}{0DA327}
+\colorlet{mygray}{black!54}
+\colorlet{basecolor}{mygreen}
+\colorlet{pagecolor}{dummitbase!50}
+\definecolor{hintcolor}{HTML}{965AD3}
+\definecolor{notecolor}{HTML}{A31621}
+\definecolor{remarkcolor}{HTML}{278AB7}
+\definecolor{exerciseref}{HTML}{DD6210}
+\colorlet{spsol}{MidnightBlue}
+
 \newcommand{\defref}[1]{\hypersetup{linkcolor=red}\hyperref[def:#1]{#1}}
 
-\newcommand{\hint}[1]{\textcolor{WildStrawberry}{\textsc{D\&F Hint.}}~\emph{#1}}
-\newcommand{\note}[1]{\textcolor{Brown}{\textsc{D\&F Note.}}~\emph{#1}}
-\newcommand{\mnote}[1]{\textcolor{RoyalBlue}{\textsc{Manual Note.}}~\emph{#1}}
+% Counter Settings
 
 \counterwithin{equation}{section}
-
 \newcounter{exercount}[subsection]
-
 \renewcommand{\theexercount}{\thesubsection.\arabic{exercount}}
 \newcommand{\exercountautorefname}{Exercise}
-
 \renewcommand{\subsectionautorefname}{Section}
 
-\newtcbtheorem[use counter*=exercount]{exer}% environment name
-    {Exercise}% Title text
-    {enhanced,% tcolorbox styles
-    attach boxed title to top left={yshift=-3mm, xshift=5mm},%
-    fonttitle=\bfseries,%
-    top = 10pt, bottom = 8pt,%
-    boxrule=1pt,%
-    arc=3mm,%
-    colback=Green!7!White, colframe=ForestGreen!30,%
-    colbacktitle=OliveGreen!14, coltitle=exercisetitle,%
-    drop fuzzy shadow = ForestGreen!70,%
-    boxed title style={%
-        size=small,%
-        boxrule=1.2pt,%
-        left=0.3ex, right=0.3ex, top=0.1ex, bottom=0.2ex,%
-        colframe=ForestGreen!50,%
-        arc = 1.5mm%
-    }%
-}
-{ex}
+% Environments
 
-\NewDocumentEnvironment{exercise}{m}
-{\begin{exer}{}{#1}}{\end{exer}}
+\newtcbtheorem[use counter*=exercount]{exer}{Exercise}{
+    dummitexercise,
+}{ex}
 
 \NewDocumentEnvironment{spex}{m o}
 {
@@ -70,38 +55,21 @@
 \newtcolorbox{lemmabox}{%
     enhanced, sharp corners,%
     boxrule=0pt, frame hidden,%
-    colback = pagecolor!72,%
-    borderline west={1.5pt}{0pt}{black!62},%
+    colback = dummitbase!70,%
+    borderline west={1.5pt}{0pt}{mygray},%
     left=7.5pt, right=5.5pt, top=4pt, bottom=4pt,%
     before skip=10pt, after skip=10pt%
 }
 
 \newenvironment{lemma}[1]{%
-    \begin{lemmabox}{\textcolor{black!62}{\textbf{\emph{Lemma.}}~{#1}}}%
-        \renewcommand{\qedsymbol}{\textcolor{black!62}{$\blacksquare$}}%
+    \begin{lemmabox}{\textcolor{mygray}{\textbf{\emph{Lemma.}}~{#1}}}%
+        \renewcommand{\qedsymbol}{\textcolor{mygray}{$\blacksquare$}}%
         \vspace{-1ex}
         \begin{proof}%
 }{%
     \end{proof}%
 \end{lemmabox}%
 }
-
-\setlist{topsep = 0pt, itemsep = 0pt, parsep = 0pt, partopsep = 0pt, itemindent = 0pt, listparindent = \parindent}
-
-\newenvironment{sol}{%
-    \begin{proof}[{\textbf{Solution}}]%
-        \leavevmode%
-}{\end{proof}}
-
-\newenvironment{solenum}{%
-    \begin{sol}%
-        \begin{subexercises}%
-}{\qedhere\end{subexercises}\end{sol}}
-
-\newenvironment{solitem}{%
-    \begin{sol}%
-        \begin{itemize}%
-}{\qedhere\end{itemize}\end{sol}}
 
 % Save the original pmatrix commands
 \let\oldpmatrix\pmatrix
