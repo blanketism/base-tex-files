@@ -24,7 +24,8 @@
 \fancyfoot[C]{\thepage}
 
 % Spacing Settings
-
+\setlength{\lineskiplimit}{-7pt}
+\setlength{\lineskip}{0pt}
 % Table of Contents Settings
 \renewcommand{\@pnumwidth}{2.7em}
 \renewcommand{\@tocrmarg}{3.7em}
@@ -39,6 +40,6 @@
 
 % Loadings
 
-\RequirePackage{blanketbase}
+\RequirePackage{base}
 \RequirePackage{\manual@theme}
 \RequirePackage{sharedstyles}
