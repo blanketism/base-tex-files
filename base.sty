@@ -1,11 +1,11 @@
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesPackage{blanketbase}
+\ProvidesPackage{base}
 
 \RequirePackage{graphicx}
 \RequirePackage{mathtools}
 \RequirePackage{amssymb}
 \RequirePackage{amsthm}
-\RequirePackage[skins, breakable, theorems, raster, listings]{tcolorbox}
+\RequirePackage[skins, theorems, raster, listings]{tcolorbox}
 \RequirePackage{tikz}
 \RequirePackage[dvipsnames]{xcolor}
 \RequirePackage{enumitem}
@@ -25,10 +25,10 @@
 % General Macros
 
 \newcommand{\nzero}{\setminus\{0\}}
-\renewcommand{\b}{\textbf}
+\newcommand{\mb}[1]{\mathbf{#1}}
 \renewcommand{\qedsymbol}{$\blacksquare$}
-\newcommand{\rightimp}{($\Rightarrow$)}
-\newcommand{\leftimp}{($\Leftarrow$)}
+\newcommand{\rightimp}{{\noindent($\boldsymbol{\Rightarrow}$)}~}
+\newcommand{\leftimp}{{\noindent($\boldsymbol{\Leftarrow}$)}~}
 \newcommand{\inv}{^{-1}}
 \newcommand{\zp}{\zbb^+}
 \newcommand{\dd}{\,\mathrm{d}}
