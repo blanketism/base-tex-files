@@ -1,0 +1,145 @@
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{notesenvs}
+\RequirePackage{pifont}
+
+% Color Settings
+
+\definecolor{defcolor}{HTML}{DD4B40}
+\definecolor{theocolor}{HTML}{7261A3}
+\definecolor{propcolor}{HTML}{F3A712}
+\definecolor{corcolor}{HTML}{47706E}
+\definecolor{lemcolor}{HTML}{A8C686}
+
+% Tier 1 Environments
+
+\newtcolorbox{defi}[1][]{
+    enhanced,
+    left=7.5pt, right=7.5pt, top=4pt, bottom=4pt,
+    fonttitle=\bfseries,
+    title=Definition,
+    arc=3mm,
+    colback=defcolor!10!white, 
+    colframe=defcolor,
+    colbacktitle=defcolor,
+    coltitle=white,
+    overlay={
+        \node[
+        circle, 
+        fill=defcolor,
+        inner sep=0pt,
+        minimum size=1.5em, 
+        text=white
+        ] at (frame.north west) {$\bigstar$};
+    },
+}
+
+\newtcbtheorem[
+    number within=section,
+    crefname={theorem}{theorems},
+    ]{theo}{Theorem}{
+    enhanced,
+    left=7.5pt, right=7.5pt, top=4pt, bottom=4pt,
+    fonttitle=\bfseries,
+    arc=3mm,
+    colback=theocolor!10!white,
+    colframe=theocolor,
+    colbacktitle=theocolor,
+    coltitle=white,
+    overlay={
+        \node[
+        circle, 
+        fill=theocolor,
+        inner sep=0pt,
+        minimum size=1.5em, 
+        text=white
+        ] at (frame.north west) {\large\ding{170}};
+    },
+}{theo}
+
+\newtcbtheorem[
+    use counter from=theo,
+    crefname={proposition}{propositions}
+    ]{prop}{Proposition}{
+    enhanced,
+    left=7.5pt, right=7.5pt, top=4pt, bottom=4pt,
+    fonttitle=\bfseries,
+    arc=3mm,
+    colback=propcolor!10!white, colframe=propcolor,
+    colbacktitle=propcolor, coltitle=white,
+    overlay={
+        \node[
+        circle, 
+        fill=propcolor, 
+        inner sep=0pt,
+        minimum size=1.5em, 
+        text=white
+        ] at (frame.north west) {\Large$\clubsuit$};
+    },
+}{prop}
+
+% Tier 2 Environments
+
+\newtcbtheorem[
+    use counter from=theo,
+    crefname={corollary}{corollaries}
+    ]{coro}{Corollary}{
+    enhanced,
+    left=7.5pt, right=7.5pt, top=4pt, bottom=4pt,
+    fonttitle=\bfseries,
+    arc=3mm,
+    colback=corcolor!10!white, colframe=corcolor,
+    colbacktitle=corcolor!40!white, coltitle=corcolor!60!black,
+    overlay={
+        \node[
+        circle, 
+        fill=corcolor, 
+        inner sep=0pt,
+        minimum size=1.5em, 
+        text=white
+        ] at (frame.north west) {\large{\rotatebox[origin=c]{45}{$\blacksquare$}}};
+    },
+}{coro}
+
+\newtcbtheorem[
+    use counter from=theo,
+    crefname={lemma}{lemmas}
+    ]{lemm}{Lemma}{
+    enhanced,
+    left=7.5pt, right=7.5pt, top=4pt, bottom=4pt,
+    fonttitle=\bfseries,
+    arc=3mm,
+    colback=lemcolor!10!white, colframe=lemcolor,
+    colbacktitle=lemcolor!50!white, coltitle=lemcolor!60!black,
+    overlay={
+        \node[
+        circle, 
+        fill=lemcolor, 
+        inner sep=0pt,
+        minimum size=1.5em, 
+        text=white
+        ] at (frame.north west) {\Large$\spadesuit$};
+    },
+}{lemm}
+
+% Tier 3 Environments
+
+\newtcolorbox{example}{
+    enhanced, sharp corners,
+    fonttitle=\bfseries,
+    title=Example,
+    boxrule=0pt, frame hidden,
+    colback = gray!10,
+    colbacktitle=gray!30, coltitle=black,
+    borderline west={2pt}{0pt}{Blue!80},
+    left=7.5pt, right=7.5pt, top=4pt, bottom=4pt,
+    before skip=10pt, after skip=10pt
+}
+
+\newtcolorbox{note}{
+    enhanced,
+    left=7.5pt, right=7.5pt, top=4pt, bottom=4pt,
+    frame hidden,
+    arc=3mm,
+    colback=white,
+    borderline={1pt}{0pt}{dashed, Blue!80},
+}
