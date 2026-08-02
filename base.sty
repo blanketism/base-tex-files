@@ -14,7 +14,7 @@
 
 % Enumitem Settings
 
-\setlist{listparindent=\parindent, parsep = 0pt, itemsep = 0pt, topsep = 0pt, labelsep = 0.4em}
+\setlist{listparindent=\parindent, parsep = 0pt, itemsep = 0pt, topsep = 0pt, labelindent = 2em, labelsep = 0.5em}
 
 \setlist[enumerate, 1]{label=(\arabic*)}
 
@@ -22,13 +22,18 @@
 \setlist[subexercises, 1]{label=(\alph*)}
 \setlist[subexercises, 2]{label=(\roman*)}
 
+\RequirePackage{myfontcommands}
+\RequirePackage{myalgebracommands}
+\RequirePackage{mystatisticscommands}
+\RequirePackage{myanalysiscommands}
+
 % General Macros
 
 \newcommand{\nzero}{\setminus\{0\}}
 \newcommand{\mb}[1]{\mathbf{#1}}
 \renewcommand{\qedsymbol}{$\blacksquare$}
-\newcommand{\rightimp}{{\noindent($\boldsymbol{\Rightarrow}$)}~}
-\newcommand{\leftimp}{{\noindent($\boldsymbol{\Leftarrow}$)}~}
+\newcommand{\rightimp}{{\noindent$\boldsymbol{(\Rightarrow)}$}~}
+\newcommand{\leftimp}{{\noindent$\boldsymbol{(\Leftarrow)}$}~}
 \newcommand{\inv}{^{-1}}
 \newcommand{\zp}{\zbb^+}
 \newcommand{\dd}{\,\mathrm{d}}
@@ -44,10 +49,5 @@
 \DeclareMathOperator{\argmin}{\arg\,\min}
 \DeclareMathOperator{\argmax}{\arg\,\max}
 \DeclareMathOperator{\im}{im}
-
-\RequirePackage{myfontcommands}
-\RequirePackage{myalgebracommands}
-\RequirePackage{mystatisticscommands}
-\RequirePackage{myanalysiscommands}
 
 \endinput
