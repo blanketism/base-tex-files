@@ -2,8 +2,16 @@
 \ProvidesClass{blanketmanual}
 
 % Options
+\newif\if@blanketdraft
+\@blanketdraftfalse
+
 \DeclareOption{axler}{\def\manual@theme{axlerstyle}}
 \DeclareOption{dummit}{\def\manual@theme{dummitstyle}}
+\DeclareOption{draft}{%
+    \@blanketdrafttrue
+    \PassOptionsToClass{draft}{extarticle}%
+}
+\DeclareOption*{\PassOptionsToClass{\CurrentOption}{extarticle}}
 \ProcessOptions\relax
 
 \ifdefined\manual@theme\else
@@ -42,3 +50,9 @@
 \RequirePackage{base}
 \RequirePackage{\manual@theme}
 \RequirePackage{sharedstyles}
+
+% Draft Mode
+\if@blanketdraft
+    \nofiles
+    \tcbstartdraftmode
+\fi
