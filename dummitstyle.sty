@@ -16,10 +16,10 @@
 \colorlet{mygray}{black!54}
 \colorlet{basecolor}{mygreen}
 \colorlet{pagecolor}{dummitbase!50}
-\definecolor{hintcolor}{HTML}{965AD3}
-\definecolor{notecolor}{HTML}{A31621}
-\definecolor{remarkcolor}{HTML}{278AB7}
-\definecolor{exerciseref}{HTML}{DD6210}
+\definecolor{hintcolor}{HTML}{D92C26}
+\definecolor{notecolor}{HTML}{4549AC}
+\definecolor{remarkcolor}{HTML}{8A3196}
+\definecolor{exerciseref}{HTML}{D62A52}
 \colorlet{spsol}{MidnightBlue}
 
 \newcommand{\defref}[1]{\hypersetup{linkcolor=red}\hyperref[def:#1]{#1}}
@@ -71,17 +71,17 @@
 \end{lemmabox}%
 }
 
-% Save the original pmatrix commands
+% Custom Commands Fixing Font Issues
 \let\oldpmatrix\pmatrix
 \let\oldendpmatrix\endpmatrix
-
-% Renew the environment to inject the tight array stretch
 \renewenvironment{pmatrix}[1][]{%
-    \renewcommand{\arraystretch}{0.9}% <-- Adjust this value as needed
+    \renewcommand{\arraystretch}{0.9}%
     \oldpmatrix
 }{%
   \oldendpmatrix
 }
+\renewcommand{\semidir}{\mathbin{\raisebox{-0.20pt}[\height]{\scalebox{1.04}[1.30]{$\rtimes$}}}}
+\renewcommand{\pmod}[1]{\mkern4mu(\operatorname{mod}\mkern3mu#1)}
 
 % Cycles Command
 
@@ -92,8 +92,4 @@
 }
 \ExplSyntaxOff
 
-% Semidirect Product Command
-
-\renewcommand{\semidir}{\mathbin{\raisebox{-0.20pt}[\height]{\scalebox{1.04}[1.30]{$\rtimes$}}}}
-\renewcommand{\pmod}[1]{\mkern4mu(\operatorname{mod}\mkern3mu#1)}
 \endinput
