@@ -1,5 +1,5 @@
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesClass{blanketmanual}[2024/06/10 Blanket Manual Class]
+\ProvidesClass{blanketmanual}
 
 % Options
 \DeclareOption{axler}{\def\manual@theme{axlerstyle}}
@@ -24,14 +24,13 @@
 \fancyfoot[C]{\thepage}
 
 % Spacing Settings
-\setlength{\lineskiplimit}{-7pt}
-\setlength{\lineskip}{0pt}
+
 % Table of Contents Settings
 \renewcommand{\@pnumwidth}{2.7em}
 \renewcommand{\@tocrmarg}{3.7em}
 
 % General Spacing Settings
-\setlength{\parindent}{0.75cm}
+\setlength{\parindent}{1.5em}
 \setlength{\jot}{0.25ex}
 
 % Page Header Settings
