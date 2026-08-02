@@ -54,6 +54,12 @@
     \begin{proof}[\emph{\textbf{\textcolor{#1}{Solution.}}}\@addpunct{}]%
 }{\end{proof}}
 
+\NewDocumentEnvironment{soliff}{O{basecolor}}{%
+    \begin{sol}[#1]
+        \leavevmode%
+
+}{\end{sol}}
+
 \NewDocumentEnvironment{solenum}{O{basecolor}}{%
     \begin{sol}[#1]
         \leavevmode%
