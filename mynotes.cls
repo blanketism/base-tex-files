@@ -13,21 +13,30 @@
 \fancyhead[RE]{\rightmark}
 \fancyhead[RO]{\leftmark}
 \fancyfoot[C]{\thepage}
+\RequirePackage{setspace}
+\setstretch{0.93}
 
 % Loadings
 
 \RequirePackage{base}
-\pagecolor{CadetBlue!15}
-\RequirePackage[nameinlink]{cleveref}
+\RequirePackage{widebar-notmine}
+\usetikzlibrary{arrows.meta, calc, positioning, shadows, shapes.geometric}
 
-\RequirePackage[proportional,scaled=1.064]{erewhon}
-\RequirePackage[erewhon,vvarbb,bigdelims]{newtxmath}
+\RequirePackage{stix2}
 \RequirePackage[T1]{fontenc}
-\renewcommand*\oldstylenums[1]{\textosf{#1}}
+\renewcommand{\phi}{\varphi}
+\renewcommand{\pmod}[1]{\mkern4mu(\operatorname{mod}\mkern3mu#1)}
+
+\definecolor{mypagecolor}{HTML}{FAF7ED}
+\pagecolor{mypagecolor}
+\RequirePackage[nameinlink,capitalise]{cleveref}
 
 \RequirePackage{notesenvs}
+\renewcommand{\qedsymbol}{\small$\square$}
 
 % Spacing Settings
+
+\setlist{listparindent=\parindent, parsep = 0pt, itemsep = 0pt, topsep = 0pt, labelindent = 1em, leftmargin = 2.5em, labelsep = 0.25em}
 
 % Table of Contents Settings
 \renewcommand{\@pnumwidth}{2.7em}
@@ -40,3 +49,8 @@
 % Page Header Settings
 \setlength{\headheight}{15pt}
 \addtolength{\topmargin}{-3.0pt}
+
+% Redefining base.sty Commands
+
+\renewcommand{\rightimp}{{\noindent\raisebox{-1pt}{\large\ding{225}}}~}
+\renewcommand{\leftimp}{{\noindent\rotatebox[origin=c]{180}{\large\ding{225}}}~}
