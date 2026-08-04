@@ -13,6 +13,9 @@
 \definecolor{notecolor}{HTML}{717182}
 \definecolor{mylinkcolor}{HTML}{2655FF}
 
+% Enumitem Settings
+
+\setlist{listparindent=\parindent, parsep = 0pt, itemsep = 0pt, topsep = 0pt, labelindent = 2em, labelsep = 0.5em}
 
 % ToC Settings
 
@@ -72,7 +75,7 @@
             ] at ($(title.north west)!0.5!(title.south west)$) {\Large{#5}};
         },
         underlay={
-            \draw[line width=2pt, #2] (title.south west) -- ($(frame.south west)+(0,4pt)$);
+            \draw[line width=2pt, #2] (title.south west) -- ($(frame.south west)+(0,2pt)$);
         }
     }
 }
@@ -128,7 +131,7 @@
 
 \NewDocumentEnvironment{example}{o}{
     \IfValueTF{#1}
-    {\begin{ex}[title={Example~{\small\ding{228}}~#1}]}
+    {\begin{ex}[title={Example~{\small\ding{228}}~#1},bottomtitle=-4pt,]}
     {\begin{ex}}
 }{\end{ex}}
 
