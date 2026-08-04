@@ -1,6 +1,16 @@
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesClass{mynotes}
 
+% Options
+\newif\if@notesdraft
+\@notesdraftfalse
+
+\DeclareOption{draft}{%
+    \@notesdrafttrue
+    \PassOptionsToClass{draft}{extarticle}%
+}
+\ProcessOptions\relax
+
 % Page Settings
 
 \LoadClass[11pt, twoside]{extarticle}
@@ -18,13 +28,14 @@
 
 % Loadings
 
-\RequirePackage{base}
 \RequirePackage{widebar-notmine}
+\RequirePackage{base}
+\RequirePackage{newpxtext}
+\RequirePackage{newpxmath}
+\RequirePackage[T1]{fontenc}
 \usetikzlibrary{arrows.meta, calc, positioning, shadows, shapes.geometric}
 
-\RequirePackage{stix2}
-\RequirePackage[T1]{fontenc}
-\renewcommand{\phi}{\varphi}
+\renewcommand{\bar}[1]{\widebar{#1}\hspace{0.75pt}{}}
 \renewcommand{\pmod}[1]{\mkern4mu(\operatorname{mod}\mkern3mu#1)}
 
 \definecolor{mypagecolor}{HTML}{FAF7ED}
@@ -35,9 +46,7 @@
 \renewcommand{\qedsymbol}{\small$\square$}
 
 % Spacing Settings
-
-\setlist{listparindent=\parindent, parsep = 0pt, itemsep = 0pt, topsep = 0pt, labelindent = 1em, leftmargin = 2.5em, labelsep = 0.25em}
-
+\nointerlineskip
 % Table of Contents Settings
 \renewcommand{\@pnumwidth}{2.7em}
 \renewcommand{\@tocrmarg}{3.7em}
@@ -54,3 +63,9 @@
 
 \renewcommand{\rightimp}{{\noindent\raisebox{-1pt}{\large\ding{225}}}~}
 \renewcommand{\leftimp}{{\noindent\rotatebox[origin=c]{180}{\large\ding{225}}}~}
+
+% Draft Mode
+\if@notesdraft
+    \nofiles
+    \tcbstartdraftmode
+\fi
