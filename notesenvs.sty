@@ -4,142 +4,143 @@
 
 % Color Settings
 
-\definecolor{defcolor}{HTML}{DD4B40}
-\definecolor{theocolor}{HTML}{7261A3}
-\definecolor{propcolor}{HTML}{F3A712}
-\definecolor{corcolor}{HTML}{47706E}
-\definecolor{lemcolor}{HTML}{A8C686}
+\definecolor{defcolor}{HTML}{592CD4}
+\definecolor{theocolor}{HTML}{C42114}
+\definecolor{propcolor}{HTML}{3EA8B5}
+\definecolor{corcolor}{HTML}{2EA62F}
+\definecolor{lemcolor}{HTML}{9F3FA1}
+\definecolor{excolor}{HTML}{D18800}
+\definecolor{notecolor}{HTML}{717182}
+\definecolor{mylinkcolor}{HTML}{2655FF}
 
-% Tier 1 Environments
 
-\newtcolorbox{defi}[1][]{
-    enhanced,
-    left=7.5pt, right=7.5pt, top=4pt, bottom=4pt,
-    fonttitle=\bfseries,
-    title=Definition,
-    arc=3mm,
-    colback=defcolor!10!white, 
-    colframe=defcolor,
-    colbacktitle=defcolor,
-    coltitle=white,
-    overlay={
-        \node[
-        circle, 
-        fill=defcolor,
-        inner sep=0pt,
-        minimum size=1.5em, 
-        text=white
-        ] at (frame.north west) {$\bigstar$};
-    },
+% ToC Settings
+
+\hypersetup{
+    colorlinks=true,
+    linkcolor=mylinkcolor,
+}
+
+% Skeleton for Environments
+
+\newcommand{\defn}[1]{\noindent{\textcolor{defcolor}{\ding{117}~#1:}}}
+\newcommand{\term}[1]{\textcolor{defcolor}{#1}}
+\newtcolorbox{groupdef}{
+    enhanced, arc=2mm,
+    left=2pt, right=2pt, top=2pt, bottom=2pt,
+    frame hidden, boxrule=0pt, opacityback=0,
+    borderline={1pt}{0pt}{defcolor, dashed},
+}
+
+\tcbset{
+    importantenv/.style n args={2}{
+        enhanced,
+        left=7.5pt, right=7.5pt, top=4pt, bottom=4pt,
+        sharp corners,
+        arc=3mm,
+        rounded corners=northeast,
+        rounded corners=southwest,
+        drop fuzzy shadow = #1!70,
+        colback=#1!10!white, colframe=#1,
+        colbacktitle=#1, coltitle=white,
+        separator sign = {~\small\ding{228}},
+        attach boxed title to top left={yshift=-0.5mm},
+        interior style={
+            top color=#1!25, bottom color=#1!5,
+        },
+        boxed title style={sharp corners, colframe=#1, colback=#1, arc=3mm, rounded corners=northeast},
+        overlay={
+            \node[circle, fill=#1, inner sep=0pt,minimum size=1.65em, text=white,
+            ] at ($(title.north west)!0.5!(title.south west)$) {\Large#2};
+        },
+    }
+}
+
+\tcbset{
+    simplelineenv/.style n args={5}{
+        enhanced, sharp corners,
+        title={#1},
+        boxrule=0pt, frame hidden,
+        opacityback=0,
+        toptitle=0pt, bottomtitle=0pt,
+        coltitle=#2,
+        left=7.5pt, right=7.5pt, top=0pt, bottom=0pt,
+        separator sign = {~\small\ding{228}},
+        overlay={
+            \node[
+            inner sep=0pt,minimum size=1.5em, text=#3, #4,
+            ] at ($(title.north west)!0.5!(title.south west)$) {\Large{#5}};
+        },
+        underlay={
+            \draw[line width=2pt, #2] (title.south west) -- ($(frame.south west)+(0,4pt)$);
+        }
+    }
 }
 
 \newtcbtheorem[
-    number within=section,
-    crefname={theorem}{theorems},
-    ]{theo}{Theorem}{
-    enhanced,
-    left=7.5pt, right=7.5pt, top=4pt, bottom=4pt,
-    fonttitle=\bfseries,
-    arc=3mm,
-    colback=theocolor!10!white,
-    colframe=theocolor,
-    colbacktitle=theocolor,
-    coltitle=white,
-    overlay={
-        \node[
-        circle, 
-        fill=theocolor,
-        inner sep=0pt,
-        minimum size=1.5em, 
-        text=white
-        ] at (frame.north west) {\large\ding{170}};
-    },
+    counter within=section,
+    crefname={Theorem}{Theorems}
+]{theo}{\hspace{1.82pt}\smash{Theorem}}{
+    importantenv={theocolor}{\ding{170}}
 }{theo}
 
+\NewDocumentEnvironment{theorem}{O{}}{
+    \begin{theo}{\smash{#1}}{\thetcbcounter}
+}{\end{theo}}
+
 \newtcbtheorem[
     use counter from=theo,
-    crefname={proposition}{propositions}
-    ]{prop}{Proposition}{
-    enhanced,
-    left=7.5pt, right=7.5pt, top=4pt, bottom=4pt,
-    fonttitle=\bfseries,
-    arc=3mm,
-    colback=propcolor!10!white, colframe=propcolor,
-    colbacktitle=propcolor, coltitle=white,
-    overlay={
-        \node[
-        circle, 
-        fill=propcolor, 
-        inner sep=0pt,
-        minimum size=1.5em, 
-        text=white
-        ] at (frame.north west) {\Large$\clubsuit$};
-    },
+    crefname={Proposition}{Propositions}
+]{prop}{\smash{\hspace{1.82pt}Proposition}}{
+    importantenv={propcolor}{\ding{168}}
 }{prop}
 
-% Tier 2 Environments
+\NewDocumentEnvironment{proposition}{O{}}{
+    \begin{prop}{\smash{#1}}{\thetcbcounter}
+}{\end{prop}}
 
 \newtcbtheorem[
     use counter from=theo,
-    crefname={corollary}{corollaries}
-    ]{coro}{Corollary}{
-    enhanced,
-    left=7.5pt, right=7.5pt, top=4pt, bottom=4pt,
-    fonttitle=\bfseries,
-    arc=3mm,
-    colback=corcolor!10!white, colframe=corcolor,
-    colbacktitle=corcolor!40!white, coltitle=corcolor!60!black,
-    overlay={
-        \node[
-        circle, 
-        fill=corcolor, 
-        inner sep=0pt,
-        minimum size=1.5em, 
-        text=white
-        ] at (frame.north west) {\large{\rotatebox[origin=c]{45}{$\blacksquare$}}};
-    },
-}{coro}
+    crefname={Corollary}{Corollaries}
+]{cor}{\smash{Corollary}}{
+    simplelineenv={}{corcolor}{white}{circle, fill=corcolor}{\ding{171}}
+}{cor}
+
+\NewDocumentEnvironment{corollary}{O{}}{
+    \begin{cor}{\smash{#1}}{\thetcbcounter}
+}{\end{cor}}
 
 \newtcbtheorem[
     use counter from=theo,
-    crefname={lemma}{lemmas}
-    ]{lemm}{Lemma}{
-    enhanced,
-    left=7.5pt, right=7.5pt, top=4pt, bottom=4pt,
-    fonttitle=\bfseries,
-    arc=3mm,
-    colback=lemcolor!10!white, colframe=lemcolor,
-    colbacktitle=lemcolor!50!white, coltitle=lemcolor!60!black,
-    overlay={
-        \node[
-        circle, 
-        fill=lemcolor, 
-        inner sep=0pt,
-        minimum size=1.5em, 
-        text=white
-        ] at (frame.north west) {\Large$\spadesuit$};
-    },
-}{lemm}
+    crefname={Lemma}{Lemmas}
+]{lem}{Lemma}{
+    simplelineenv={}{lemcolor}{white}{circle, fill=lemcolor}{\ding{70}}
+}{lem}
 
-% Tier 3 Environments
+\NewDocumentEnvironment{lemma}{O{}}{
+    \begin{lem}{\smash{#1}}{\thetcbcounter}
+}{\end{lem}}
 
-\newtcolorbox{example}{
-    enhanced, sharp corners,
-    fonttitle=\bfseries,
-    title=Example,
-    boxrule=0pt, frame hidden,
-    colback = gray!10,
-    colbacktitle=gray!30, coltitle=black,
-    borderline west={2pt}{0pt}{Blue!80},
-    left=7.5pt, right=7.5pt, top=4pt, bottom=4pt,
-    before skip=10pt, after skip=10pt
+\newtcolorbox{ex}[1][]{
+    simplelineenv={Example}{excolor}{excolor}{}{\ding{51}},
+    #1
 }
 
+\NewDocumentEnvironment{example}{o}{
+    \IfValueTF{#1}
+    {\begin{ex}[title={Example~{\small\ding{228}}~#1}]}
+    {\begin{ex}}
+}{\end{ex}}
+
 \newtcolorbox{note}{
-    enhanced,
-    left=7.5pt, right=7.5pt, top=4pt, bottom=4pt,
-    frame hidden,
-    arc=3mm,
-    colback=white,
-    borderline={1pt}{0pt}{dashed, Blue!80},
+    simplelineenv={Note}{notecolor}{notecolor}{}{\ding{45}}
+}
+
+\NewDocumentEnvironment{proofnum}{}{
+    \begin{proof}
+        \leavevmode
+        \begin{enumerate}
+}{
+        \qedhere\end{enumerate}
+    \end{proof}
 }
