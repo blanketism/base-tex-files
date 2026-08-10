@@ -24,16 +24,18 @@
     linkcolor=mylinkcolor,
 }
 
-% Skeleton for Environments
+% Definition Settings
 
 \newcommand{\defn}[1]{\noindent{\textcolor{defcolor}{\ding{117}~#1:}}}
 \newcommand{\term}[1]{\textcolor{defcolor}{#1}}
 \newtcolorbox{groupdef}{
     enhanced, arc=2mm,
     left=2pt, right=2pt, top=2pt, bottom=2pt,
-    frame hidden, boxrule=0pt, opacityback=0,
+    frame hidden, boxrule=0pt, colback=mypagecolor,
     borderline={1pt}{0pt}{defcolor, dashed},
 }
+
+% Theorem and Proposition Settings
 
 \tcbset{
     importantenv/.style n args={2}{
@@ -53,20 +55,22 @@
         },
         boxed title style={sharp corners, colframe=#1, colback=#1, arc=3mm, rounded corners=northeast},
         overlay={
-            \node[circle, fill=#1, inner sep=0pt,minimum size=1.65em, text=white,
+            \node[circle, fill=#1, inner sep=0pt,minimum size=1.9em, text=white,
             ] at ($(title.north west)!0.5!(title.south west)$) {\Large#2};
         },
     }
 }
 
+% Lemma, Corollary, Example, and Note Settings
+
 \tcbset{
     simplelineenv/.style n args={5}{
         enhanced, sharp corners,
         title={#1},
-        boxrule=0pt, frame hidden,
-        opacityback=0,
+        boxrule=0pt,
+        colback=mypagecolor, frame hidden,
         toptitle=0pt, bottomtitle=0pt,
-        coltitle=#2,
+        coltitle=#2, colbacktitle=mypagecolor,
         left=7.5pt, right=7.5pt, top=0pt, bottom=0pt,
         separator sign = {~\small\ding{228}},
         overlay={
@@ -80,47 +84,72 @@
     }
 }
 
+% Counter Settings
+
+\newcounter{theocounter}[section]
+\counterwithin{theocounter}{section}
+\providecommand*{\theocounterautorefname}{Theorem}
+\newcounter{propcounter}[section]
+\counterwithin{propcounter}{section}
+\providecommand*{\propcounterautorefname}{Proposition}
+\newcounter{corcounter}[section]
+\counterwithin{corcounter}{section}
+\providecommand*{\corcounterautorefname}{Corollary}
+\newcounter{lemcounter}[section]
+\counterwithin{lemcounter}{section}
+\providecommand*{\lemcounterautorefname}{Lemma}
+
+% Environment Definitions
+
 \newtcbtheorem[
-    counter within=section,
-    crefname={Theorem}{Theorems}
+    use counter*=theocounter,
 ]{theo}{\hspace{1.82pt}\smash{Theorem}}{
     importantenv={theocolor}{\ding{170}}
 }{theo}
 
 \NewDocumentEnvironment{theorem}{O{}}{
+    \stepcounter{propcounter}
+    \stepcounter{corcounter}
+    \stepcounter{lemcounter}
     \begin{theo}{\smash{#1}}{\thetcbcounter}
 }{\end{theo}}
 
 \newtcbtheorem[
-    use counter from=theo,
-    crefname={Proposition}{Propositions}
+    use counter*=propcounter,
 ]{prop}{\smash{\hspace{1.82pt}Proposition}}{
     importantenv={propcolor}{\ding{168}}
 }{prop}
 
 \NewDocumentEnvironment{proposition}{O{}}{
+    \stepcounter{corcounter}
+    \stepcounter{lemcounter}
+    \stepcounter{theocounter}
     \begin{prop}{\smash{#1}}{\thetcbcounter}
 }{\end{prop}}
 
 \newtcbtheorem[
-    use counter from=theo,
-    crefname={Corollary}{Corollaries}
+    use counter*=corcounter,
 ]{cor}{\smash{Corollary}}{
     simplelineenv={}{corcolor}{white}{circle, fill=corcolor}{\ding{171}}
 }{cor}
 
 \NewDocumentEnvironment{corollary}{O{}}{
+    \stepcounter{lemcounter}
+    \stepcounter{theocounter}
+    \stepcounter{propcounter}
     \begin{cor}{\smash{#1}}{\thetcbcounter}
 }{\end{cor}}
 
 \newtcbtheorem[
-    use counter from=theo,
-    crefname={Lemma}{Lemmas}
+    use counter*=lemcounter,
 ]{lem}{Lemma}{
     simplelineenv={}{lemcolor}{white}{circle, fill=lemcolor}{\ding{70}}
 }{lem}
 
 \NewDocumentEnvironment{lemma}{O{}}{
+    \stepcounter{theocounter}
+    \stepcounter{propcounter}
+    \stepcounter{corcounter}
     \begin{lem}{\smash{#1}}{\thetcbcounter}
 }{\end{lem}}
 
