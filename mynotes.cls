@@ -40,7 +40,6 @@
 
 \definecolor{mypagecolor}{HTML}{FAF7ED}
 \pagecolor{mypagecolor}
-\RequirePackage[nameinlink,capitalise]{cleveref}
 
 \RequirePackage{notesenvs}
 \renewcommand{\qedsymbol}{\small$\square$}
