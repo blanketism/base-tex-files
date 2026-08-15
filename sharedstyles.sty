@@ -1,6 +1,8 @@
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesPackage{sharedstyles}
 
+% The colors that need to be instantiated in each book style are: basecolor, pagecolor, hintcolor, notecolor, remarkcolor, exerciseref, spsol, termcolor
+
 % Page and Hyperref Settings
 
 \pagecolor{pagecolor}
@@ -10,6 +12,8 @@
     linkcolor=basecolor,
     urlcolor=red}
 \fancyfoot[R]{\hypersetup{linkcolor=basecolor}\hyperlink{clickabletoc}{Table of Contents}}
+
+% Book Specific Settings
 
 \tcbset{axlerexercise/.style={
     enhanced,
@@ -43,8 +47,13 @@
 
 % Exercise Environment
 
-\NewDocumentEnvironment{exercise}{m}
-{\begin{exer}{}{#1}}{\end{exer}}
+\NewDocumentEnvironment{exercise}{s m}{
+    \IfBooleanTF{#1}{
+        \begin{exer}[separator sign none]{{\hypersetup{linkcolor=appendixcolor}\hyperref[apex:#2]{$\bigstar$}}}{#2}
+    }{
+        \begin{exer}{}{#2}
+    }
+}{\end{exer}}
 
 \newcommand{\exref}[1]{\hypersetup{linkcolor=exerciseref}\textup{\autoref{ex:#1}}}
 
@@ -77,5 +86,6 @@
 \newcommand{\hint}[1]{{\color{hintcolor}\textbf{\bookauthor~Hint.}}~\emph{#1}}
 \newcommand{\note}[1]{{\color{notecolor}\textbf{\bookauthor~Note.}}~\emph{#1}}
 \newcommand{\remark}[1]{{\color{remarkcolor}\textbf{Manual~Remark.}}~\emph{#1}}
+\newcommand{\term}[1]{\textcolor{termcolor}{#1}}
 
 \endinput
