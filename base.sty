@@ -48,6 +48,7 @@
 \DeclarePairedDelimiter{\gen}{\langle}{\rangle}
 \DeclarePairedDelimiter{\floor}{\lfloor}{\rfloor}
 \DeclarePairedDelimiter{\set}{\{}{\}}
+\newcommand{\setmid}{\;\middle|\;}
 \DeclarePairedDelimiter{\norm}{\lVert}{\rVert}
 \DeclareMathOperator{\argmin}{\arg\,\min}
 \DeclareMathOperator{\argmax}{\arg\,\max}
@@ -58,5 +59,25 @@
 \let\oldphi\phi
 \let\phi\varphi
 \let\varphi\oldphi
+
+% Tuple Command
+
+\ExplSyntaxOn
+\NewDocumentCommand{\tupleterms}{m m}{
+    \seq_set_split:Nnn \l_tmpa_seq { , } { #1 }
+    \bool_set_true:N \l_tmpa_bool
+    \seq_map_inline:Nn \l_tmpa_seq {
+        \bool_if:NTF \l_tmpa_bool
+            { \bool_set_false:N \l_tmpa_bool {##1}\sb{#2} }
+            { ##1\sb{#2} }
+    }
+}
+\ExplSyntaxOff
+
+\NewDocumentCommand{\tuple}{s m O{i} O{1} O{n}}{
+    \IfBooleanTF{#1}
+        {(\tupleterms{#2}{#3})_{#3=#4}^{#5}}
+        {(\tupleterms{#2}{#3})_{#4}^{#5}}
+}
 
 \endinput
