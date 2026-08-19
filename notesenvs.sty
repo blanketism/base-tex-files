@@ -101,6 +101,7 @@
 
 % Environment Definitions
 
+% Theorem Settings
 \newtcbtheorem[
     use counter*=theocounter,
 ]{theo}{\hspace{1.82pt}\smash{Theorem}}{
@@ -114,6 +115,7 @@
     \begin{theo}{\smash{#1}}{\thetcbcounter}
 }{\end{theo}}
 
+% Proposition Settings
 \newtcbtheorem[
     use counter*=propcounter,
 ]{prop}{\smash{\hspace{1.82pt}Proposition}}{
@@ -127,6 +129,7 @@
     \begin{prop}{\smash{#1}}{\thetcbcounter}
 }{\end{prop}}
 
+% Corollary Settings
 \newtcbtheorem[
     use counter*=corcounter,
 ]{cor}{\smash{Corollary}}{
@@ -140,6 +143,7 @@
     \begin{cor}{\smash{#1}}{\thetcbcounter}
 }{\end{cor}}
 
+% Lemma Settings
 \newtcbtheorem[
     use counter*=lemcounter,
 ]{lem}{Lemma}{
@@ -153,8 +157,9 @@
     \begin{lem}{\smash{#1}}{\thetcbcounter}
 }{\end{lem}}
 
+% Example and Note Settings
 \newtcolorbox{ex}[1][]{
-    simplelineenv={Example}{excolor}{excolor}{}{\ding{51}},
+    simplelineenv={Example}{excolor}{excolor}{}{\ding{46}},
     #1
 }
 
@@ -166,6 +171,23 @@
 
 \newtcolorbox{note}{
     simplelineenv={Note}{notecolor}{notecolor}{}{\ding{45}}
+}
+
+\csdef{pfsym@theo}{\ding{170}}
+\csdef{pfsym@prop}{\ding{168}}
+\csdef{pfsym@cor}{\ding{171}}
+\csdef{pfsym@lem}{\ding{70}}
+
+\NewDocumentEnvironment{pf}{O{}}{
+    \ifcsdef{pfsym@#1}{
+        \newcommand{\myheader}{\textcolor{#1color}{Proof of \csname the#1counter\endcsname}}
+        \renewcommand{\qedsymbol}{\textcolor{#1color}{\csuse{pfsym@#1}}}
+    }{
+        \newcommand{\myheader}{\textcolor{black}{Proof}}
+    }
+    \begin{proof}[\myheader]
+}{
+    \end{proof}
 }
 
 \NewDocumentEnvironment{proofnum}{}{
