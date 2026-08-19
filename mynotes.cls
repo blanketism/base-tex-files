@@ -13,7 +13,7 @@
 
 % Page Settings
 
-\LoadClass[11pt, twoside]{extarticle}
+\LoadClass[10pt, twoside]{extarticle}
 \raggedbottom
 \RequirePackage[margin = 1in]{geometry}
 
@@ -23,8 +23,6 @@
 \fancyhead[RE]{\rightmark}
 \fancyhead[RO]{\leftmark}
 \fancyfoot[C]{\thepage}
-\RequirePackage{setspace}
-\setstretch{0.93}
 
 % Loadings
 
@@ -60,8 +58,8 @@
 
 % Redefining base.sty Commands
 
-\renewcommand{\rightimp}{{\noindent\raisebox{-1pt}{\large\ding{225}}}~}
-\renewcommand{\leftimp}{{\noindent\rotatebox[origin=c]{180}{\large\ding{225}}}~}
+\renewcommand{\rightimp}{{\noindent\raisebox{-1pt}{\large\ding{225}}}\hspace{0.5em}}
+\renewcommand{\leftimp}{{\noindent\rotatebox[origin=c]{180}{\large\ding{225}}}\hspace{0.5em}}
 
 % Draft Mode
 \if@notesdraft
