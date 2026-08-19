@@ -79,7 +79,7 @@
             ] at ($(title.north west)!0.5!(title.south west)$) {\Large{#5}};
         },
         underlay={
-            \draw[line width=2pt, #2] (title.south west) -- ($(frame.south west)+(0,2pt)$);
+            \draw[line width=2pt, #2] ($(title.south west)-(0,2pt)$) -- ($(frame.south west)+(0,2pt)$);
         }
     }
 }
