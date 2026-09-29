@@ -26,20 +26,14 @@
 
 % Loadings
 
-\RequirePackage{widebar-notmine}
 \RequirePackage{base}
 \RequirePackage{notomath}
 \RequirePackage[T1]{fontenc}
-\usetikzlibrary{arrows.meta, calc, positioning, shadows, shapes.geometric}
 
-\renewcommand{\bar}[1]{\widebar{#1}\hspace{0.75pt}{}}
-\renewcommand{\pmod}[1]{\mkern4mu(\operatorname{mod}\mkern3mu#1)}
+\pagecolor[HTML]{FFFDF7}
 
-\definecolor{mypagecolor}{HTML}{FAF7ED}
-\pagecolor{mypagecolor}
-
+\RequirePackage[nameinlink]{cleveref}
 \RequirePackage{notesenvs}
-\renewcommand{\qedsymbol}{\small$\square$}
 
 % Spacing Settings
 \nointerlineskip
@@ -54,11 +48,6 @@
 % Page Header Settings
 \setlength{\headheight}{15pt}
 \addtolength{\topmargin}{-3.0pt}
-
-% Redefining base.sty Commands
-
-\renewcommand{\rightimp}{{\noindent\raisebox{-1pt}{\large\ding{225}}}\hspace{0.5em}}
-\renewcommand{\leftimp}{{\noindent\rotatebox[origin=c]{180}{\large\ding{225}}}\hspace{0.5em}}
 
 % Draft Mode
 \if@notesdraft
