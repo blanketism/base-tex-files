@@ -28,8 +28,7 @@
 
 \RequirePackage{widebar-notmine}
 \RequirePackage{base}
-\RequirePackage{newpxtext}
-\RequirePackage{newpxmath}
+\RequirePackage{notomath}
 \RequirePackage[T1]{fontenc}
 \usetikzlibrary{arrows.meta, calc, positioning, shadows, shapes.geometric}
 
