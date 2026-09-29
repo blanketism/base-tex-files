@@ -27,6 +27,8 @@
 \renewcommand{\theexercount}{\thesubsection\arabic{exercount}}
 \newcommand{\exercountautorefname}{Exercise}
 \renewcommand{\subsectionautorefname}{Section}
+\newcounter{lemmacount}
+\newcommand{\lemmacountautorefname}{Lemma}
 
 % Environments
 
@@ -48,6 +50,20 @@
     after skip=1.2\baselineskip, before skip=1.2\baselineskip%
 }
 
+\newtcbtheorem[use counter=lemmacount]{lem}{Lemma}{
+    enhanced, frame hidden,
+    arc=3mm,
+    colframe=gray,
+    colback=white,
+    colbacktitle=basecolor!15!white,
+    fonttitle=\bfseries,
+    coltitle=black,
+    toptitle=2pt, bottomtitle=2pt,
+}{lem}
+
+\NewDocumentEnvironment{lemma}{m}{
+    \begin{lem}{}{#1}
+}{\end{lem}}
 % Custom Commands
 
 \newcommand{\apexref}[1]{\hyperref[apex:#1]{\emph{Appendix \MakeUppercase{#1}}}}
