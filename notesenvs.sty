@@ -1,6 +1,7 @@
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesPackage{notesenvs}
 \RequirePackage{pifont}
+\RequirePackage{etoolbox}
 
 % Color Settings
 
@@ -26,43 +27,56 @@
 
 % Definition Settings
 
-\newcommand{\defn}[1]{\noindent{\textcolor{defcolor}{{\small{\ding{117}}}~#1:}}}
+\newcommand{\defn}[1]{\noindent{\textcolor{defcolor}{{\small{\ding{117}}}~#1.}}}
 \newcommand{\term}[1]{\textcolor{defcolor}{#1}}
-\newtcolorbox{groupdef}{
-    enhanced, arc=2mm,
-    before skip=1ex, after skip=1ex,
-    left=2pt, right=2pt, top=2pt, bottom=2pt,
-    frame hidden, boxrule=0pt, colback=mypagecolor,
-    borderline={1pt}{0pt}{defcolor, dashed},
+
+\newlist{deflist}{itemize}{1}
+\setlist[deflist,1]{label=\textcolor{defcolor}{\scriptsize\ding{117}}}
+
+\newcommand{\note}{\noindent{\textcolor{notecolor}{\ding{45}~\textbf{Note.}~}}}
+
+\newcommand{\notes@title}[2]{\smash{#1}\hspace{0.4em}#2}
+
+\newcommand{\notes@leftstrip}{%
+    \pgfpathrectangle{\pgfpointorigin}%
+        {\pgfqpoint{\dimexpr\kvtcb@left@rule+0.5pt\relax}{\tcb@height}}%
+    \pgfsetfillcolor{tcbcolframe}%
+    \pgfusepath{fill}%
 }
 
-% Theorem and Proposition Settings
-
 \tcbset{
-    importantenv/.style n args={2}{
-        enhanced,
-        left=7.5pt, right=7.5pt, top=4pt, bottom=4pt,
+    lightenv/.style={
         sharp corners,
-        arc=3mm,
-        rounded corners=northeast,
-        rounded corners=southwest,
-        drop fuzzy shadow = #1!70,
-        colback=#1!10!white, colframe=#1,
-        colbacktitle=#1, coltitle=white,
-        separator sign = {~\small\ding{228}},
-        attach boxed title to top left={yshift=-0.5mm},
-        interior style={
-            top color=#1!35, bottom color=#1!5,
-        },
-        boxed title style={sharp corners, colframe=#1, colback=#1, arc=3mm, rounded corners=northeast},
-        overlay={
-            \node[circle, fill=#1, inner sep=0pt,minimum size=1.9em, text=white,
-            ] at ($(title.north west)!0.5!(title.south west)$) {\Large#2};
-        },
+        boxrule=0pt, leftrule=2pt, colframe=#1,
+        frame engine=freelance, frame code=\notes@leftstrip,
+        colback=#1!8,
+        attach title to upper={\par\noindent},
+        left=7.5pt, right=7.5pt, top=5pt, bottom=5pt,
+        coltitle=#1, fonttitle=\bfseries,
+        separator sign = {},
+        description delimiters={(}{)},
+        description font=\mdseries\upshape,
     }
 }
 
-% Lemma, Corollary, Example, and Note Settings
+\newcommand{\notes@resultnum}{\csname thetcb@cnt@theo\endcsname}
+
+\newcommand{\notes@newresult}[6][use counter from=theo]{%
+    \newtcbtheorem[#1, crefname={#4}{#5}]{#3}{\notes@title{#6}{#4}}{lightenv={#3color}}{#3}%
+    \csdef{pfsym@#3}{#6}%
+    \NewDocumentEnvironment{#2}{O{}}%
+        {\begin{#3}{##1}{\thetcbcounter}}%
+        {\end{#3}}%
+}
+
+% Environment Definitions (theorem must come first: it owns the counter)
+
+\notes@newresult[number within=section]{theorem}{theo}{Theorem}{Theorems}{\ding{170}}
+\notes@newresult{proposition}{prop}{Proposition}{Propositions}{\ding{168}}
+\notes@newresult{corollary}{cor}{Corollary}{Corollaries}{\ding{171}}
+\notes@newresult{lemma}{lem}{Lemma}{Lemmas}{\ding{70}}
+
+% Example and Note Settings
 
 \tcbset{
     simplelineenv/.style n args={5}{
@@ -70,9 +84,9 @@
         before skip=0pt, after skip=1.2\baselineskip,
         title={#1},
         boxrule=0pt,
-        colback=mypagecolor, frame hidden,
+        colback=white, frame hidden,
         toptitle=0pt, bottomtitle=0pt,
-        coltitle=#2, colbacktitle=mypagecolor,
+        coltitle=#2, colbacktitle=white,
         left=7.5pt, right=7.5pt, top=0pt, bottom=0pt,
         separator sign = {~\small\ding{228}},
         overlay={
@@ -86,80 +100,6 @@
     }
 }
 
-% Counter Settings
-
-\newcounter{theocounter}[section]
-\counterwithin{theocounter}{section}
-\providecommand*{\theocounterautorefname}{Theorem}
-\newcounter{propcounter}[section]
-\counterwithin{propcounter}{section}
-\providecommand*{\propcounterautorefname}{Proposition}
-\newcounter{corcounter}[section]
-\counterwithin{corcounter}{section}
-\providecommand*{\corcounterautorefname}{Corollary}
-\newcounter{lemcounter}[section]
-\counterwithin{lemcounter}{section}
-\providecommand*{\lemcounterautorefname}{Lemma}
-
-% Environment Definitions
-
-% Theorem Settings
-\newtcbtheorem[
-    use counter*=theocounter,
-]{theo}{\hspace{1.82pt}\smash{Theorem}}{
-    importantenv={theocolor}{\ding{170}}
-}{theo}
-
-\NewDocumentEnvironment{theorem}{O{}}{
-    \stepcounter{propcounter}
-    \stepcounter{corcounter}
-    \stepcounter{lemcounter}
-    \begin{theo}{\smash{#1}}{\thetcbcounter}
-}{\end{theo}}
-
-% Proposition Settings
-\newtcbtheorem[
-    use counter*=propcounter,
-]{prop}{\smash{\hspace{1.82pt}Proposition}}{
-    importantenv={propcolor}{\ding{168}}
-}{prop}
-
-\NewDocumentEnvironment{proposition}{O{}}{
-    \stepcounter{corcounter}
-    \stepcounter{lemcounter}
-    \stepcounter{theocounter}
-    \begin{prop}{\smash{#1}}{\thetcbcounter}
-}{\end{prop}}
-
-% Corollary Settings
-\newtcbtheorem[
-    use counter*=corcounter,
-]{cor}{\smash{Corollary}}{
-    simplelineenv={}{corcolor}{white}{circle, fill=corcolor}{\ding{171}}
-}{cor}
-
-\NewDocumentEnvironment{corollary}{O{}}{
-    \stepcounter{lemcounter}
-    \stepcounter{theocounter}
-    \stepcounter{propcounter}
-    \begin{cor}{\smash{#1}}{\thetcbcounter}
-}{\end{cor}}
-
-% Lemma Settings
-\newtcbtheorem[
-    use counter*=lemcounter,
-]{lem}{Lemma}{
-    simplelineenv={}{lemcolor}{white}{circle, fill=lemcolor}{\ding{70}}
-}{lem}
-
-\NewDocumentEnvironment{lemma}{O{}}{
-    \stepcounter{theocounter}
-    \stepcounter{propcounter}
-    \stepcounter{corcounter}
-    \begin{lem}{\smash{#1}}{\thetcbcounter}
-}{\end{lem}}
-
-% Example and Note Settings
 \newtcolorbox{ex}[1][]{
     simplelineenv={Example}{excolor}{excolor}{}{\ding{46}},
     #1
@@ -171,18 +111,9 @@
     {\begin{ex}}
 }{\end{ex}}
 
-\newtcolorbox{note}{
-    simplelineenv={Note}{notecolor}{notecolor}{}{\ding{45}}
-}
-
-\csdef{pfsym@theo}{\ding{170}}
-\csdef{pfsym@prop}{\ding{168}}
-\csdef{pfsym@cor}{\ding{171}}
-\csdef{pfsym@lem}{\ding{70}}
-
 \NewDocumentEnvironment{pf}{O{}}{
     \ifcsdef{pfsym@#1}{
-        \newcommand{\myheader}{\textcolor{#1color}{Proof of \csname the#1counter\endcsname}}
+        \newcommand{\myheader}{\textcolor{#1color}{Proof of \notes@resultnum}}
         \renewcommand{\qedsymbol}{\textcolor{#1color}{\csuse{pfsym@#1}}}
     }{
         \newcommand{\myheader}{\textcolor{black}{Proof}}
