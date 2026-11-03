@@ -15,10 +15,11 @@
 \colorlet{mygray}{black!54}
 \colorlet{basecolor}{mygreen}
 \colorlet{pagecolor}{dummitbase!50}
-\definecolor{hintcolor}{HTML}{D92C26}
-\definecolor{notecolor}{HTML}{4549AC}
-\definecolor{remarkcolor}{HTML}{8A3196}
-\definecolor{exerciseref}{HTML}{D62A52}
+\colorlet{hintcolor}{basecolor!90!white}
+\colorlet{notecolor}{basecolor!70!white}
+\colorlet{remarkcolor}{basecolor!50!white}
+\definecolor{termcolor}{HTML}{7D1CC7}
+\definecolor{exerciseref}{HTML}{0F99B8}
 \colorlet{spsol}{MidnightBlue}
 
 % Counter Settings
@@ -69,6 +70,7 @@
 }
 
 % Custom Commands Fixing Font Issues
+
 \let\oldpmatrix\pmatrix
 \let\oldendpmatrix\endpmatrix
 \renewenvironment{pmatrix}[1][]{%
@@ -79,6 +81,10 @@
 }
 \renewcommand{\semidir}{\mathbin{\raisebox{-0.20pt}[\height]{\scalebox{1.04}[1.30]{$\rtimes$}}}}
 \renewcommand{\pmod}[1]{\mkern4mu(\operatorname{mod}\mkern3mu#1)}
+
+\let\oldphi\varphi
+\let\varphi\phi
+\let\phi\oldphi
 
 % Cycles Command
 
