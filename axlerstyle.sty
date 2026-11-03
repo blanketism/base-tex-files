@@ -75,10 +75,16 @@
 \NewDocumentEnvironment{lemma}{m}{
     \begin{lem}{}{#1}
 }{\end{lem}}
+
 % Custom Commands
 
 \newcommand{\apexref}[1]{\hyperref[apex:#1]{\emph{Appendix \MakeUppercase{#1}}}}
 \newcommand{\apnote}[2]{\textcolor{red!70}{\emph{\textbf{Appendix.} See \apexref{#1}{#2}}}}
+\newcommand{\mlnset}[1]{^{(#1)}}
+\newcommand{\mlnsym}[1]{_{\text{sym}}^{(#1)}}
+\newcommand{\mlnalt}[1]{_{\text{alt}}^{(#1)}}
+\DeclareMathOperator{\perm}{perm}
+\DeclareMathOperator{\sign}{sign}
 \newcommand{\trans}{^{\mathrm t}}
 
 % Appendix Commands
