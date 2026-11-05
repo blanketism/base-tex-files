@@ -43,30 +43,36 @@
 
 % Style
 
+\tcbset{axlerstripe/.code={\colorlet{axlerstripe}{#1}}}
+
 \tcbset{axlerexercise/.style={
     enhanced,
     toptitle=2pt, bottomtitle=2pt,
     arc=0pt, drop fuzzy shadow southeast,
     boxrule=0pt,
-    borderline west={2.5pt}{0pt}{#1},
+    axlerstripe=basecolor,
+    borderline west={2.5pt}{0pt}{axlerstripe},
     colframe = gray!20, colback = White,
     coltitle=black, fonttitle=\bfseries,
     after skip=1.2\baselineskip, before skip=1.2\baselineskip
-}, axlerexercise/.default=basecolor}
+}}
+
+\tcbset{specialexercise/.style={
+    axlerstripe=exerciseref,
+    colframe=exerciseref!15,
+    colback=exerciseref!3,
+}}
 
 % Environments
 
-\newtcbtheorem[use counter*=exercount]{exer}{Exercise}{
-    axlerexercise,
-}{ex}
+\newtcbtheorem[use counter*=exercount]{exer}{Exercise}{axlerexercise}{ex}
 
 \newtcolorbox{apex}[1]{%
-    axlerexercise=ForestGreen,
-    colframe=Green!20,
-    title={Exercise~\MakeUppercase{#1}}~\hyperref[ex:#1]{\ding{52}},
-    label=apex:#1
+    axlerexercise, axlerstripe=ForestGreen, colframe=Green!20,
+    title={Exercise \MakeUppercase{#1} \hyperref[ex:#1]{\ding{52}}},
+    label=apex:#1,
+    before upper={\ifcsdef{blanket@apex@#1}{{\let\label\@gobble\csuse{blanket@apex@#1}}\par}{}},
 }
-
 
 \newtcbtheorem[use counter=lemmacount]{lem}{Lemma}{
     enhanced, frame hidden,
@@ -85,7 +91,6 @@
 
 % Custom Commands
 
-\newcommand{\apexref}[1]{\hyperref[apex:#1]{\emph{Appendix \MakeUppercase{#1}}}}
 \newcommand{\mlnset}[1]{^{(#1)}}
 \newcommand{\mlnsym}[1]{_{\text{sym}}^{(#1)}}
 \newcommand{\mlnalt}[1]{_{\text{alt}}^{(#1)}}

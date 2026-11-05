@@ -15,36 +15,47 @@
 
 % Exercise Environment
 
-\NewDocumentEnvironment{exercise}{s m}{
-    \IfBooleanTF{#1}{
-        \begin{exer}[separator sign none]{{\hypersetup{linkcolor=appendixcolor}\hyperref[apex:#2]{\ding{52}}}}{#2}
-    }{
-        \begin{exer}{}{#2}
-    }
-}{\end{exer}}
+\pgfkeysifdefined{/tcb/specialexercise/.@cmd}{}{\tcbset{specialexercise/.style={}}}
+\tcbset{blanket@thisexercise/.style={}}
+
+\newcommand{\apex@icon}[1]{\hyperref[apex:#1]{\ding{52}}}
+
+\NewDocumentEnvironment{exercise}{s t! O{} m +b}{%
+    \csgdef{blanket@apex@#4}{#5}%
+    \IfBooleanT{#2}{\tcbset{blanket@thisexercise/.append style={specialexercise}}}%
+    \IfBooleanTF{#1}{%
+        \ifblank{#3}{\tcbset{blanket@thisexercise/.append style={separator sign none}}}{}%
+        \begin{exer}[blanket@thisexercise]{#3\ifblank{#3}{}{~}\apex@icon{#4}}{#4}%
+    }{%
+        \begin{exer}[blanket@thisexercise]{#3}{#4}%
+    }%
+    #5%
+    \end{exer}%
+}{}
 
 \newcommand{\exref}[1]{{\hypersetup{linkcolor=exerciseref}\textup{\autoref{ex:#1}}}}
+\newcommand{\appendixex}[1]{\begin{apex}{#1}\end{apex}}
 
 % Solution Environments
 
-\NewDocumentEnvironment{sol}{O{basecolor}}{%
-    \begin{proof}[\emph{\textbf{\textcolor{#1}{Solution.}}}\@addpunct{}]%
+\NewDocumentEnvironment{sol}{}{%
+    \begin{proof}[\emph{\textbf{Solution.}}]%
 }{\end{proof}}
 
-\NewDocumentEnvironment{soliff}{O{basecolor}}{%
-    \begin{sol}[#1]
+\NewDocumentEnvironment{soliff}{}{%
+    \begin{sol}
         \leavevmode%
 
 }{\end{sol}}
 
-\NewDocumentEnvironment{solenum}{O{basecolor}}{%
-    \begin{sol}[#1]
+\NewDocumentEnvironment{solenum}{}{%
+    \begin{sol}
         \leavevmode%
         \begin{subexercises}%
 }{\qedhere\end{subexercises}\end{sol}}
 
-\NewDocumentEnvironment{solitem}{O{basecolor}}{%
-    \begin{sol}[#1]
+\NewDocumentEnvironment{solitem}{}{%
+    \begin{sol}
         \leavevmode%
         \begin{itemize}%
 }{\qedhere\end{itemize}\end{sol}}

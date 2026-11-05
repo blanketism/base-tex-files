@@ -20,7 +20,6 @@
 \colorlet{remarkcolor}{basecolor!50!white}
 \definecolor{termcolor}{HTML}{7D1CC7}
 \definecolor{exerciseref}{HTML}{0F99B8}
-\colorlet{spsol}{MidnightBlue}
 
 % Counter Settings
 
@@ -55,19 +54,12 @@
     dummitexercise,
 }{ex}
 
-\NewDocumentEnvironment{spex}{m o}
-{
-    \IfValueTF{#2}
-    {\def\spextitle{Exercise~\theexercount:~#2}}
-    {\def\spextitle{Exercise~\theexercount}}
-    \begin{exer}[
-        title = \spextitle,
-        drop fuzzy shadow = blue!20,
-        colback=RoyalBlue!8, colframe=CadetBlue!60,
-        colbacktitle=BlueViolet!15, coltitle=MidnightBlue,
-        boxed title style ={colframe=NavyBlue!70}
-    ]{}{#1}
-}{\end{exer}}
+\tcbset{specialexercise/.style={
+    drop fuzzy shadow = blue!20,
+    colback=RoyalBlue!8, colframe=CadetBlue!60,
+    colbacktitle=BlueViolet!15, coltitle=MidnightBlue,
+    boxed title style={colframe=NavyBlue!70}
+}}
 
 \newtcolorbox{lemmabox}{%
     enhanced, sharp corners,%
