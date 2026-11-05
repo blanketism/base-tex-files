@@ -27,8 +27,8 @@
 \colorlet{hintcolor}{basecolor!90!white}
 \colorlet{notecolor}{basecolor!75!white}
 \colorlet{remarkcolor}{basecolor!50!white}
-\definecolor{exerciseref}{HTML}{7557FF}
-\definecolor{termcolor}{HTML}{378ffa}
+\definecolor{exerciseref}{HTML}{8855F2}
+\definecolor{termcolor}{HTML}{3E63DE}
 \definecolor{appendixcolor}{HTML}{DE4949}
 
 % Counter Settings
@@ -41,25 +41,32 @@
 \newcounter{lemmacount}
 \newcommand{\lemmacountautorefname}{Lemma}
 
+% Style
+
+\tcbset{axlerexercise/.style={
+    enhanced,
+    toptitle=2pt, bottomtitle=2pt,
+    arc=0pt, drop fuzzy shadow southeast,
+    boxrule=0pt,
+    borderline west={2.5pt}{0pt}{#1},
+    colframe = gray!20, colback = White,
+    coltitle=black, fonttitle=\bfseries,
+    after skip=1.2\baselineskip, before skip=1.2\baselineskip
+}, axlerexercise/.default=basecolor}
+
 % Environments
 
 \newtcbtheorem[use counter*=exercount]{exer}{Exercise}{
     axlerexercise,
 }{ex}
 
-\newtcolorbox{apex}[1][]{%
-    enhanced,
-    title={Exercise \MakeUppercase{#1}},
-    label=apex:#1,
-    toptitle=2pt, bottomtitle=2pt,
-    arc=0pt, drop fuzzy shadow southeast,
-    boxrule=0pt, %
-    colframe = Green!20, coltitle=black, %
-    colback = White,
-    fonttitle=\bfseries, %
-    borderline west={2.5pt}{0pt}{ForestGreen},%
-    after skip=1.2\baselineskip, before skip=1.2\baselineskip%
+\newtcolorbox{apex}[1]{%
+    axlerexercise=ForestGreen,
+    colframe=Green!20,
+    title={Exercise~\MakeUppercase{#1}}~\hyperref[ex:#1]{\ding{52}},
+    label=apex:#1
 }
+
 
 \newtcbtheorem[use counter=lemmacount]{lem}{Lemma}{
     enhanced, frame hidden,
@@ -79,7 +86,6 @@
 % Custom Commands
 
 \newcommand{\apexref}[1]{\hyperref[apex:#1]{\emph{Appendix \MakeUppercase{#1}}}}
-\newcommand{\apnote}[2]{\textcolor{red!70}{\emph{\textbf{Appendix.} See \apexref{#1}{#2}}}}
 \newcommand{\mlnset}[1]{^{(#1)}}
 \newcommand{\mlnsym}[1]{_{\text{sym}}^{(#1)}}
 \newcommand{\mlnalt}[1]{_{\text{alt}}^{(#1)}}

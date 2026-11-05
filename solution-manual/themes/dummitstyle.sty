@@ -32,6 +32,25 @@
 
 % Environments
 
+\tcbset{dummitexercise/.style={
+    enhanced,
+    fonttitle=\bfseries,
+    top = 10pt, bottom = 8pt,
+    boxrule=1pt,
+    arc=3mm,
+    colback=Green!7!White, colframe=ForestGreen!30,
+    colbacktitle=OliveGreen!14, coltitle=basecolor,
+    drop fuzzy shadow = ForestGreen!70,
+    attach boxed title to top left={yshift=-3mm, xshift=5mm},
+    boxed title style={
+        size=small,
+        boxrule=1.2pt,
+        left=0.3ex, right=0.3ex, top=0.1ex, bottom=0.2ex,
+        colframe=ForestGreen!50,
+        arc = 1.5mm
+    }
+}}
+
 \newtcbtheorem[use counter*=exercount]{exer}{Exercise}{
     dummitexercise,
 }{ex}
@@ -71,16 +90,8 @@
 
 % Custom Commands Fixing Font Issues
 
-\let\oldpmatrix\pmatrix
-\let\oldendpmatrix\endpmatrix
-\renewenvironment{pmatrix}[1][]{%
-    \renewcommand{\arraystretch}{0.9}%
-    \oldpmatrix
-}{%
-  \oldendpmatrix
-}
+\AtBeginEnvironment{pmatrix}{\renewcommand{\arraystretch}{0.9}}
 \renewcommand{\semidir}{\mathbin{\raisebox{-0.20pt}[\height]{\scalebox{1.04}[1.30]{$\rtimes$}}}}
-\renewcommand{\pmod}[1]{\mkern4mu(\operatorname{mod}\mkern3mu#1)}
 
 \let\oldphi\varphi
 \let\varphi\phi

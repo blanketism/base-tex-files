@@ -13,49 +13,17 @@
     urlcolor=red}
 \fancyfoot[R]{\hypersetup{linkcolor=basecolor}\hyperlink{clickabletoc}{Table of Contents}}
 
-% Book Specific Settings
-
-\tcbset{axlerexercise/.style={
-    enhanced,
-    toptitle=2pt, bottomtitle=2pt,
-    arc=0pt, drop fuzzy shadow southeast,
-    boxrule=0pt,
-    borderline west={2.5pt}{0pt}{basecolor},
-    colframe = gray!20, colback = White,
-    coltitle=black, fonttitle=\bfseries,
-    after skip=1.2\baselineskip, before skip=1.2\baselineskip
-}}
-
-\tcbset{dummitexercise/.style={
-    enhanced,
-    fonttitle=\bfseries,
-    top = 10pt, bottom = 8pt,
-    boxrule=1pt,
-    arc=3mm,
-    colback=Green!7!White, colframe=ForestGreen!30,
-    colbacktitle=OliveGreen!14, coltitle=basecolor,
-    drop fuzzy shadow = ForestGreen!70,
-    attach boxed title to top left={yshift=-3mm, xshift=5mm},
-    boxed title style={
-        size=small,
-        boxrule=1.2pt,
-        left=0.3ex, right=0.3ex, top=0.1ex, bottom=0.2ex,
-        colframe=ForestGreen!50,
-        arc = 1.5mm
-    }
-}}
-
 % Exercise Environment
 
 \NewDocumentEnvironment{exercise}{s m}{
     \IfBooleanTF{#1}{
-        \begin{exer}[separator sign none]{{\hypersetup{linkcolor=appendixcolor}\hyperref[apex:#2]{$\bigstar$}}}{#2}
+        \begin{exer}[separator sign none]{{\hypersetup{linkcolor=appendixcolor}\hyperref[apex:#2]{\ding{52}}}}{#2}
     }{
         \begin{exer}{}{#2}
     }
 }{\end{exer}}
 
-\newcommand{\exref}[1]{\hypersetup{linkcolor=exerciseref}\textup{\autoref{ex:#1}}}
+\newcommand{\exref}[1]{{\hypersetup{linkcolor=exerciseref}\textup{\autoref{ex:#1}}}}
 
 % Solution Environments
 
@@ -86,6 +54,6 @@
 \newcommand{\hint}[1]{{\color{hintcolor}\textbf{\bookauthor~Hint.}}~\emph{#1}}
 \newcommand{\note}[1]{{\color{notecolor}\textbf{\bookauthor~Note.}}~\emph{#1}}
 \newcommand{\remark}[1]{{\color{remarkcolor}\textbf{Manual~Remark.}}~\emph{#1}}
-\newcommand{\term}[1]{\textcolor{termcolor}{\textup{#1}}}
+\newcommand{\term}[1]{\textcolor{termcolor}{\textbf{\textup{#1}}}}
 
 \endinput

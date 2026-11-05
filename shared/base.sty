@@ -3,20 +3,25 @@
 
 \RequirePackage{graphicx}
 \RequirePackage{mathtools}
-\RequirePackage{etoolbox}
 \RequirePackage{amssymb}
 \RequirePackage{amsthm}
+\RequirePackage{etoolbox}
+\RequirePackage{setspace}
+\RequirePackage[dvipsnames]{xcolor}
 \RequirePackage[skins, theorems, raster, listings]{tcolorbox}
 \RequirePackage{tikz}
 \usetikzlibrary{arrows.meta, positioning, shadows, shapes.geometric, calc}
-\RequirePackage[dvipsnames]{xcolor}
 \RequirePackage{enumitem}
+\RequirePackage{pifont}
 \RequirePackage{microtype}
 \RequirePackage{hyperref}
 
 % Spacing Settings
 
 \setlength{\fboxsep}{0.5ex}
+\setstretch{1.25}
+
+\AtBeginEnvironment{pmatrix}{\edef\arraystretch{\fpeval{\arraystretch/\baselinestretch}}}
 
 % Enumitem Settings
 
