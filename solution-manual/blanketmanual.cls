@@ -50,6 +50,7 @@
 \RequirePackage{base}
 \RequirePackage{\manual@theme}
 \RequirePackage{sharedstyles}
+\setstretch{1.16}
 
 % Draft Mode
 \if@blanketdraft
