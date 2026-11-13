@@ -3,91 +3,11 @@
 
 % Manual Settings
 
-\RequirePackage{stickstootext}
-\RequirePackage[stickstoo, vvarbb]{newtxmath}
 \newcommand{\bookauthor}{D\&F}
-\renewcommand{\arraystretch}{1.1}
-
-% Color Settings
-
-\definecolor{dummitbase}{HTML}{faecca}
-\definecolor{mygreen}{HTML}{0DA327}
-\colorlet{mygray}{black!54}
-\colorlet{basecolor}{mygreen}
-\colorlet{pagecolor}{dummitbase!50}
-\colorlet{hintcolor}{basecolor!90!white}
-\colorlet{notecolor}{basecolor!70!white}
-\colorlet{remarkcolor}{basecolor!50!white}
-\definecolor{termcolor}{HTML}{BA1A1A}
-\definecolor{exerciseref}{HTML}{0F99B8}
 
 % Counter Settings
 
 \counterwithin{equation}{section}
-\newcounter{exercount}[subsection]
-\renewcommand{\theexercount}{\thesubsection.\arabic{exercount}}
-\newcommand{\exercountautorefname}{Exercise}
-\renewcommand{\subsectionautorefname}{Section}
-
-% Environments
-
-\tcbset{dummitexercise/.style={
-    enhanced,
-    fonttitle=\bfseries,
-    top = 10pt, bottom = 8pt,
-    boxrule=1pt,
-    arc=3mm,
-    colback=Green!7!White, colframe=ForestGreen!30,
-    colbacktitle=OliveGreen!14, coltitle=basecolor,
-    drop fuzzy shadow = ForestGreen!70,
-    attach boxed title to top left={yshift=-3mm, xshift=5mm},
-    boxed title style={
-        size=small,
-        boxrule=1.2pt,
-        left=0.3ex, right=0.3ex, top=0.1ex, bottom=0.2ex,
-        colframe=ForestGreen!50,
-        arc = 1.5mm
-    }
-}}
-
-\newtcbtheorem[use counter*=exercount]{exer}{Exercise}{
-    dummitexercise,
-}{ex}
-
-\tcbset{specialexercise/.style={
-    drop fuzzy shadow = blue!20,
-    colback=RoyalBlue!8, colframe=CadetBlue!60,
-    colbacktitle=BlueViolet!15, coltitle=MidnightBlue,
-    boxed title style={colframe=NavyBlue!70}
-}}
-
-\newtcolorbox{lemmabox}{%
-    enhanced, sharp corners,%
-    boxrule=0pt, frame hidden,%
-    colback = dummitbase!70,%
-    borderline west={1.5pt}{0pt}{mygray},%
-    left=7.5pt, right=5.5pt, top=4pt, bottom=4pt,%
-    before skip=10pt, after skip=10pt%
-}
-
-\newenvironment{lemma}[1]{%
-    \begin{lemmabox}{\textcolor{mygray}{\textbf{\emph{Lemma.}}~{#1}}}%
-        \renewcommand{\qedsymbol}{\textcolor{mygray}{$\blacksquare$}}%
-        \vspace{-1ex}
-        \begin{proof}%
-}{%
-    \end{proof}%
-\end{lemmabox}%
-}
-
-% Custom Commands Fixing Font Issues
-
-\AtBeginEnvironment{pmatrix}{\renewcommand{\arraystretch}{0.9}}
-\renewcommand{\semidir}{\mathbin{\raisebox{-0.20pt}[\height]{\scalebox{1.04}[1.30]{$\rtimes$}}}}
-
-\let\oldphi\varphi
-\let\varphi\phi
-\let\phi\oldphi
 
 % Cycles Command
 

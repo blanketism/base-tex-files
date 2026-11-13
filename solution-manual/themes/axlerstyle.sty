@@ -4,8 +4,6 @@
 
 % Manual Settings
 
-\RequirePackage{epigrafica}
-\RequirePackage[LGR,OT1]{fontenc}
 \newcommand{\bookauthor}{Axler}
 \setlist[itemize, 2]{label=$\diamond$}
 
@@ -20,74 +18,9 @@
 \renewcommand{\Im}{\operatorname{Im}}
 \renewcommand{\Re}{\operatorname{Re}}
 
-% Color Settings
-
-\definecolor{basecolor}{HTML}{2F489C}
-\colorlet{pagecolor}{ProcessBlue!3}
-\colorlet{hintcolor}{basecolor!90!white}
-\colorlet{notecolor}{basecolor!75!white}
-\colorlet{remarkcolor}{basecolor!50!white}
-\definecolor{exerciseref}{HTML}{8855F2}
-\definecolor{termcolor}{HTML}{3E63DE}
-\definecolor{appendixcolor}{HTML}{DE4949}
-
 % Counter Settings
-
 \renewcommand\thesubsection{\thesection\Alph{subsection}}
-\newcounter{exercount}[subsection]
-\renewcommand{\theexercount}{\thesubsection\arabic{exercount}}
-\newcommand{\exercountautorefname}{Exercise}
-\renewcommand{\subsectionautorefname}{Section}
-\newcounter{lemmacount}
-\newcommand{\lemmacountautorefname}{Lemma}
-
-% Style
-
-\tcbset{axlerstripe/.code={\colorlet{axlerstripe}{#1}}}
-
-\tcbset{axlerexercise/.style={
-    enhanced,
-    toptitle=2pt, bottomtitle=2pt,
-    arc=0pt, drop fuzzy shadow southeast,
-    boxrule=0pt,
-    axlerstripe=basecolor,
-    borderline west={2.5pt}{0pt}{axlerstripe},
-    colframe = gray!20, colback = White,
-    coltitle=black, fonttitle=\bfseries,
-    after skip=1.2\baselineskip, before skip=1.2\baselineskip
-}}
-
-\tcbset{specialexercise/.style={
-    axlerstripe=exerciseref,
-    colframe=exerciseref!15,
-    colback=exerciseref!3,
-}}
-
-% Environments
-
-\newtcbtheorem[use counter*=exercount]{exer}{Exercise}{axlerexercise}{ex}
-
-\newtcolorbox{apex}[1]{%
-    axlerexercise, axlerstripe=ForestGreen, colframe=Green!20,
-    title={Exercise \MakeUppercase{#1} \hyperref[ex:#1]{\ding{52}}},
-    label=apex:#1,
-    before upper={\ifcsdef{blanket@apex@#1}{{\let\label\@gobble\csuse{blanket@apex@#1}}\par}{}},
-}
-
-\newtcbtheorem[use counter=lemmacount]{lem}{Lemma}{
-    enhanced, frame hidden,
-    arc=3mm,
-    colframe=gray,
-    colback=white,
-    colbacktitle=basecolor!15!white,
-    fonttitle=\bfseries,
-    coltitle=black,
-    toptitle=2pt, bottomtitle=2pt,
-}{lem}
-
-\NewDocumentEnvironment{lemma}{m}{
-    \begin{lem}{}{#1}
-}{\end{lem}}
+\def\blanket@exerformat{\thesubsection\arabic{exercount}}
 
 % Custom Commands
 
