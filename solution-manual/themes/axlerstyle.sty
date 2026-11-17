@@ -1,6 +1,5 @@
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesPackage{axlerstyle}
-\RequirePackage{widebar-notmine}
 
 % Manual Settings
 
@@ -19,11 +18,13 @@
 \renewcommand{\Re}{\operatorname{Re}}
 
 % Counter Settings
+
 \renewcommand\thesubsection{\thesection\Alph{subsection}}
 \def\blanket@exerformat{\thesubsection\arabic{exercount}}
 
 % Custom Commands
 
+\newcommand{\property}[1]{{\noindent\textbf{#1.}}}
 \newcommand{\mlnset}[1]{^{(#1)}}
 \newcommand{\mlnsym}[1]{_{\text{sym}}^{(#1)}}
 \newcommand{\mlnalt}[1]{_{\text{alt}}^{(#1)}}
