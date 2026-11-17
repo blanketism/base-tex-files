@@ -5,16 +5,18 @@
 
 \RequirePackage{newpxtext}
 \RequirePackage{newpxmath}
+\RequirePackage{widebar-notmine}
 
 % Color Settings
 
-\definecolor{basecolor}{HTML}{2F489C}
+\definecolor{basecolor}{HTML}{1B84CF}
 \colorlet{pagecolor}{ProcessBlue!3}
 \colorlet{hintcolor}{basecolor!90!white}
 \colorlet{notecolor}{basecolor!75!white}
 \colorlet{remarkcolor}{basecolor!50!white}
-\definecolor{exerciseref}{HTML}{8855F2}
-\definecolor{termcolor}{HTML}{3E63DE}
+\definecolor{specialexstripe}{HTML}{084085}
+\definecolor{exerciseref}{HTML}{8A36FF}
+\definecolor{termcolor}{HTML}{5B78DE}
 \definecolor{appendixcolor}{HTML}{DE4949}
 
 % Page and Hyperref Settings
@@ -35,7 +37,7 @@
 \newcommand{\lemmacountautorefname}{Lemma}
 \renewcommand{\subsectionautorefname}{Section}
 
-\ifcsdef{blanket@exerformat}{}{\def\blanket@exerformat{\thesubsection.\arabic{exercount}}}
+\def\blanket@exerformat{\thesubsection.\arabic{exercount}}
 \renewcommand{\theexercount}{\blanket@exerformat}
 
 % Exercise Environment
@@ -46,20 +48,23 @@
 
 \tcbset{axlerexercise/.style={
     enhanced,
-    toptitle=2pt, bottomtitle=2pt,
-    arc=0pt, drop fuzzy shadow southeast,
+    toptitle=2pt,
+    bottomtitle=2pt,
+    arc=0pt,
+    drop fuzzy shadow southeast,
     boxrule=0pt,
     axlerstripe=basecolor,
     borderline west={2.5pt}{0pt}{axlerstripe},
-    colframe = gray!20, colback = White,
-    coltitle=black, fonttitle=\bfseries,
-    after skip=1.2\baselineskip, before skip=1.2\baselineskip
+    colframe = gray!16,
+    colback = White,
+    coltitle=black,
+    fonttitle=\bfseries
 }}
 
 \tcbset{specialexercise/.style={
-    axlerstripe=exerciseref,
-    colframe=exerciseref!15,
-    colback=exerciseref!3,
+    axlerstripe=specialexstripe,
+    colframe=gray!30,
+    colback=gray!3,
 }}
 
 % Environments
@@ -88,7 +93,6 @@
     \begin{lem}{}{#1}
 }{\end{lem}}
 
-\pgfkeysifdefined{/tcb/specialexercise/.@cmd}{}{\tcbset{specialexercise/.style={}}}
 \tcbset{blanket@thisexercise/.style={}}
 
 \newcommand{\apex@icon}[1]{\hyperref[apex:#1]{\ding{52}}}
