@@ -20,7 +20,7 @@
 
 % Page Settings
 
-\LoadClass[11pt, twoside]{extarticle}
+\LoadClass[9pt, twoside]{extarticle}
 \raggedbottom
 \RequirePackage[margin = 1in]{geometry}
 
@@ -50,11 +50,10 @@
 
 % Loadings
 
-\RequirePackage{widebar-notmine}
 \RequirePackage{base}
-\RequirePackage{\manual@theme}
 \RequirePackage{sharedstyles}
-\setstretch{1.16}
+\RequirePackage{\manual@theme}
+\setstretch{1.30}
 
 % Draft Mode
 
