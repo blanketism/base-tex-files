@@ -22,8 +22,6 @@
 
 \setlength{\fboxsep}{0.5ex}
 
-\AtBeginEnvironment{pmatrix}{\edef\arraystretch{\fpeval{\arraystretch/\baselinestretch}}}
-
 % Enumitem Settings
 
 \setlist{listparindent=\parindent, parsep = 0pt, itemsep = 0pt, topsep = 0pt, labelindent = 2em, labelsep = 0.5em}
@@ -56,6 +54,7 @@
 \DeclarePairedDelimiter{\abs}{\lvert}{\rvert}
 \DeclarePairedDelimiter{\gen}{\langle}{\rangle}
 \DeclarePairedDelimiter{\floor}{\lfloor}{\rfloor}
+\DeclarePairedDelimiter{\ceil}{\lceil}{\rceil}
 \DeclarePairedDelimiter{\set}{\{}{\}}
 \newcommand{\setmid}{\;\middle|\;}
 \DeclarePairedDelimiter{\norm}{\lVert}{\rVert}
