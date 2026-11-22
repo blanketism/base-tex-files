@@ -7,6 +7,28 @@
 \RequirePackage{newpxmath}
 \RequirePackage{widebar-notmine}
 
+% Fixing Font Superscripts
+
+\newcommand*\my@supfactor{0.80}% < 1 lowers superscripts
+\def\mylower@sups#1{%
+    \expandafter\ifx\csname supsdone@\fontname#1\endcsname\relax
+        \global\expandafter\let\csname supsdone@\fontname#1\endcsname\@empty
+        \fontdimen13#1=\my@supfactor\fontdimen13#1%
+        \fontdimen14#1=\my@supfactor\fontdimen14#1%
+        \fontdimen15#1=\my@supfactor\fontdimen15#1%
+    \fi}
+\def\my@lower@all@sups{%
+    \mylower@sups{\textfont2}\mylower@sups{\scriptfont2}\mylower@sups{\scriptscriptfont2}}
+\every@math@size\expandafter{\the\every@math@size\my@lower@all@sups}
+\AtBeginDocument{\check@mathfonts\my@lower@all@sups}
+
+% Semidirect Product Fix
+
+\renewcommand{\sdp}{\mathbin{\mathpalette\sdp@\relax}}
+\newcommand{\sdp@}[2]{
+    \vcenter{\hbox{\scalebox{1}[1.3]{$\m@th#1\rtimes$}}}
+}
+
 % Color Settings
 
 \definecolor{basecolor}{HTML}{1B84CF}
@@ -115,25 +137,23 @@
 
 % Solution Environments
 
+\newcommand\sol@fixline{\leavevmode\par\vspace{-\parskip}}
+
 \NewDocumentEnvironment{sol}{}{%
     \begin{proof}[\emph{\textbf{Solution.}}]%
 }{\end{proof}}
 
 \NewDocumentEnvironment{soliff}{}{%
-    \begin{sol}
-        \leavevmode%
-
+    \begin{sol}\sol@fixline%
 }{\end{sol}}
 
 \NewDocumentEnvironment{solenum}{}{%
-    \begin{sol}
-        \leavevmode%
+    \begin{sol}\sol@fixline%
         \begin{subexercises}%
 }{\qedhere\end{subexercises}\end{sol}}
 
 \NewDocumentEnvironment{solitem}{}{%
-    \begin{sol}
-        \leavevmode%
+    \begin{sol}\sol@fixline%
         \begin{itemize}%
 }{\qedhere\end{itemize}\end{sol}}
 
