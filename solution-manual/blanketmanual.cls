@@ -53,7 +53,6 @@
 \RequirePackage{base}
 \RequirePackage{sharedstyles}
 \RequirePackage{\manual@theme}
-\setstretch{1.30}
 
 % Draft Mode
 
